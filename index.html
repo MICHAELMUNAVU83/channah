@@ -1,0 +1,3024 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Channah Ltd | Infrastructure &amp; Technical Engineering</title>
+    <meta
+      name="description"
+      content="Kenyan infrastructure and technical engineering specialists in telecommunications, renewable energy, construction, electrical works and security systems."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Channah Ltd | Infrastructure &amp; Technical Engineering"
+    />
+    <meta
+      property="og:description"
+      content="Integrated trade, infrastructure and technology solutions across Kenya."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23f5b51b'/%3E%3Cpath d='M11 13h18v5H16v9h13v5H11z' fill='%23130d57'/%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700;800&display=swap"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          // Mirrors the original Webflow breakpoints so the port stays 1:1.
+          screens: {
+            sm: "480px",
+            md: "768px",
+            lg: "992px",
+            xl: "1280px",
+            "2xl": "1440px",
+          },
+          extend: {
+            colors: {
+              brand: "#f5b51b",
+              ink: "#130d57",
+              mist: "#f7f5ff",
+              body: "#5f5d70",
+            },
+            fontFamily: {
+              sans: ['"Open Sans"', "sans-serif"],
+              heading: ['"Inter Tight"', "sans-serif"],
+            },
+            keyframes: {
+              marquee: { to: { transform: "translateX(-100%)" } },
+            },
+            animation: {
+              marquee: "marquee 30s linear infinite",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Only primitives that repeat across sections live here; everything else is utilities in markup. -->
+    <style type="text/tailwindcss">
+      @layer base {
+        :root {
+          /* Colour the notch cut-outs blend into; override per card with [--notch:...] */
+          --notch: theme(colors.mist);
+        }
+        h1,
+        h2,
+        h3 {
+          @apply font-heading text-ink;
+        }
+      }
+
+      @layer components {
+        .shell {
+          @apply mx-auto w-full max-w-[1440px] px-5;
+        }
+        .icon {
+          @apply shrink-0 fill-none stroke-current;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .cover {
+          @apply absolute inset-0 size-full object-cover;
+        }
+
+        /* Typography */
+        .eyebrow {
+          @apply inline-block rounded-full border border-ink/20 px-3.5 text-xs font-semibold uppercase leading-[25px] tracking-[0.6px] text-brand;
+        }
+        .section-title {
+          @apply mt-2.5 text-[30px] font-semibold leading-[38px] sm:text-[32px] sm:leading-[46px] md:text-4xl md:leading-[46px] lg:text-[50px] lg:leading-[58px];
+        }
+        .hero-title {
+          @apply mb-5 pt-2.5 text-2xl font-bold leading-[34px] text-white sm:text-[38px] sm:leading-[48px] md:text-5xl md:leading-[58px] lg:pt-5 lg:text-[72px] lg:leading-[80px];
+        }
+        .kicker {
+          @apply text-xs font-semibold uppercase leading-[18px] tracking-[1.2px];
+        }
+        .text-link {
+          @apply border-b border-brand font-heading font-medium text-brand;
+        }
+
+        /* Buttons */
+        .btn {
+          @apply inline-flex items-center whitespace-nowrap rounded-full py-[5px] pl-[30px] pr-[5px] font-heading text-[15px] font-medium capitalize leading-[26px] tracking-[0.75px] transition-colors duration-300;
+        }
+        .btn-icon {
+          @apply ml-3 flex size-[50px] shrink-0 items-center justify-center rounded-full transition-colors duration-300;
+        }
+        .round-btn {
+          @apply flex size-[50px] shrink-0 items-center justify-center rounded-full sm:size-[55px];
+        }
+        /* Two stacked arrows: on hover of the nearest .group the first flies out, the second flies in. */
+        .arrow-swap {
+          @apply relative block size-[18px] overflow-hidden;
+        }
+        .arrow-swap > svg {
+          @apply absolute inset-0 size-full transition-transform duration-300 ease-out;
+        }
+        .arrow-swap > svg:last-child {
+          transform: translate(-18px, 18px);
+        }
+        .group:hover .arrow-swap > svg:first-child {
+          transform: translate(18px, -18px);
+        }
+        .group:hover .arrow-swap > svg:last-child {
+          transform: none;
+        }
+
+        /* Navigation */
+        .nav-link {
+          @apply flex items-center font-heading text-xs font-semibold uppercase leading-10 tracking-[0.3px] text-ink transition-colors hover:text-brand lg:h-[100px] lg:px-[13px] xl:px-[15px] xl:text-sm;
+        }
+        .nav-menu {
+          @apply pb-2 pl-4 lg:absolute lg:left-0 lg:top-full lg:hidden lg:w-[220px] lg:rounded-lg lg:border-b-[3px] lg:border-brand lg:bg-white lg:p-5 lg:shadow-[1px_-5px_25px_-6px_rgba(0,0,0,0.2)];
+        }
+        .nav-menu-link {
+          @apply block whitespace-nowrap px-2.5 py-[5px] font-heading text-sm font-medium tracking-[0.3px] text-ink transition-colors hover:text-brand;
+        }
+
+        /* Radio-driven controls (tabs, slider dots, pager arrows) */
+        .tab {
+          @apply mb-2.5 inline-block cursor-pointer rounded-[30px] bg-white px-5 py-3 font-semibold uppercase leading-[22px] text-brand transition-colors hover:bg-brand hover:text-white has-[:checked]:bg-brand has-[:checked]:text-white has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ink has-[:focus-visible]:ring-offset-2 sm:mb-0 lg:px-[30px] lg:py-3.5;
+        }
+        .pager-btn {
+          @apply flex size-[62px] cursor-pointer items-center justify-center rounded-full transition-opacity hover:opacity-80 has-[:checked]:cursor-default has-[:checked]:opacity-40 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-white has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-ink;
+        }
+
+        /* Lists */
+        .check-item {
+          @apply flex items-center font-heading font-medium leading-5 text-ink;
+        }
+        .check-badge {
+          @apply mr-4 size-5 rounded-full bg-brand p-1 text-white;
+          stroke-width: 3;
+        }
+        .footer-heading {
+          @apply mb-[15px] text-lg font-medium leading-6 tracking-[0.5px] text-brand sm:mb-5 lg:mb-[35px];
+        }
+        .footer-link {
+          @apply mb-2.5 block text-sm leading-5 text-white/85 transition-colors;
+        }
+        a.footer-link {
+          @apply hover:text-white;
+        }
+
+        /* Marquee */
+        .marquee-track {
+          @apply flex shrink-0 animate-marquee items-center motion-reduce:animate-none;
+        }
+        .marquee-text {
+          @apply whitespace-nowrap text-[40px] font-extrabold leading-[58px] text-mist sm:text-[60px] sm:leading-[78px] md:text-[70px] md:leading-[90px] lg:text-[100px] lg:leading-[130px];
+          /* Outlined text: fill matches the page and is painted over the inner half of a 2px stroke,
+             which hides the overlapping contours variable fonts show with a transparent fill. */
+          -webkit-text-stroke: 2px rgb(4 31 57 / 0.3);
+          paint-order: stroke fill;
+        }
+        .marquee-badge {
+          @apply mx-[35px] flex size-[50px] shrink-0 items-center justify-center rounded-full border border-brand/50 text-brand/60 md:size-[70px] lg:mx-[55px] lg:size-[90px];
+        }
+        .client-logo {
+          @apply mx-10 flex items-center gap-2.5 whitespace-nowrap font-heading text-2xl font-bold text-ink/40;
+        }
+
+        /*
+         * Notches: a tab "bitten" out of a card edge so a round button can sit in it.
+         * The pseudo-elements draw the concave fillets either side of the tab.
+         */
+        .notch,
+        .tab-notch {
+          @apply absolute bottom-0;
+          background-color: var(--notch);
+        }
+        .notch::before,
+        .notch::after,
+        .tab-notch::before,
+        .tab-notch::after {
+          @apply absolute;
+          content: "";
+        }
+
+        /* Corner variant (bottom-right of a card) */
+        .notch {
+          @apply right-0 rounded-tl-[50%] pl-3 pt-3;
+        }
+        .notch::before,
+        .notch::after {
+          @apply size-5;
+          background: radial-gradient(
+            circle farthest-side at 0 0,
+            transparent 100%,
+            var(--notch)
+          );
+        }
+        .notch::before {
+          @apply -top-5 right-0;
+        }
+        .notch::after {
+          @apply -left-5 bottom-0;
+        }
+
+        /* Edge variant (sits along the bottom edge; add --top for the top edge) */
+        .tab-notch::before,
+        .tab-notch::after {
+          @apply -bottom-px size-[25px];
+        }
+        .tab-notch::before {
+          @apply -left-[25px];
+          background: radial-gradient(
+            circle farthest-side at 0 0,
+            transparent 100%,
+            var(--notch)
+          );
+        }
+        .tab-notch::after {
+          @apply -right-[25px];
+          background: radial-gradient(
+            circle farthest-side at 100% 0,
+            transparent 100%,
+            var(--notch)
+          );
+        }
+        .tab-notch--top {
+          @apply bottom-auto top-0;
+        }
+        .tab-notch--top::before,
+        .tab-notch--top::after {
+          @apply bottom-auto top-0;
+        }
+        .tab-notch--top::before {
+          background: radial-gradient(
+            circle farthest-side at 0 100%,
+            transparent 100%,
+            var(--notch)
+          );
+        }
+        .tab-notch--top::after {
+          background: radial-gradient(
+            circle farthest-side at 100% 100%,
+            transparent 100%,
+            var(--notch)
+          );
+        }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Channah Ltd",
+        "url": "/",
+        "description": "Kenyan-registered general trade, infrastructure and technical engineering firm.",
+        "telephone": ["+254733330134", "+254722207812"],
+        "email": "info@channah.co.ke",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+254733330134",
+          "contactType": "customer service"
+        }
+      }
+    </script>
+  </head>
+
+  <body
+    class="bg-mist font-sans text-[15px] leading-[26px] text-body antialiased"
+  >
+    <a
+      href="#main"
+      class="sr-only z-50 rounded-full bg-ink px-5 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >Skip to content</a
+    >
+
+    <!-- Icon sprite (Feather). Reference with <svg class="icon"><use href="#i-name" /></svg>. -->
+    <svg class="hidden" aria-hidden="true">
+      <symbol id="i-logo" viewBox="0 0 40 40">
+        <rect width="40" height="40" rx="10" fill="#f5b51b" stroke="none" />
+        <path d="M11 11h18v5H16v8h13v5H11z" fill="#130d57" stroke="none" />
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <line x1="7" y1="17" x2="17" y2="7" />
+        <polyline points="7 7 17 7 17 17" />
+      </symbol>
+      <symbol id="i-chevron-down" viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9" />
+      </symbol>
+      <symbol id="i-chevron-left" viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6" />
+      </symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6" />
+      </symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24">
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24">
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+        />
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12" />
+      </symbol>
+      <symbol id="i-check-circle" viewBox="0 0 24 24">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+      </symbol>
+      <symbol id="i-user" viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24">
+        <polygon points="5 3 19 12 5 21 5 3" />
+      </symbol>
+      <symbol id="i-star" viewBox="0 0 24 24">
+        <polygon
+          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+        />
+      </symbol>
+      <symbol id="i-facebook" viewBox="0 0 24 24">
+        <path
+          d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+        />
+      </symbol>
+      <symbol id="i-twitter" viewBox="0 0 24 24">
+        <path
+          d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+        />
+      </symbol>
+      <symbol id="i-instagram" viewBox="0 0 24 24">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      </symbol>
+      <symbol id="i-youtube" viewBox="0 0 24 24">
+        <path
+          d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
+        />
+        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
+      </symbol>
+      <symbol id="i-zap" viewBox="0 0 24 24">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+      </symbol>
+      <symbol id="i-target" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="6" />
+        <circle cx="12" cy="12" r="2" />
+      </symbol>
+      <symbol id="i-award" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="7" />
+        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+      </symbol>
+      <symbol id="i-trending-up" viewBox="0 0 24 24">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+        <polyline points="17 6 23 6 23 12" />
+      </symbol>
+      <symbol id="i-tool" viewBox="0 0 24 24">
+        <path
+          d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+        />
+      </symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </symbol>
+      <symbol id="i-box" viewBox="0 0 24 24">
+        <path
+          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+        />
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+        <line x1="12" y1="22.08" x2="12" y2="12" />
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24">
+        <polyline points="23 4 23 10 17 10" />
+        <polyline points="1 20 1 14 7 14" />
+        <path
+          d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"
+        />
+      </symbol>
+      <symbol id="i-database" viewBox="0 0 24 24">
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+      </symbol>
+    </svg>
+
+    <!-- ============================== Header ============================== -->
+    <header class="group/header relative z-20 px-[22px] xl:px-[50px]">
+      <div class="relative flex h-[100px] items-center justify-between">
+        <!-- CSS-only mobile menu: the checkbox is toggled by the hamburger <label> below. -->
+        <input
+          type="checkbox"
+          id="nav-toggle"
+          class="peer sr-only"
+          aria-label="Toggle navigation menu"
+        />
+
+        <nav
+          aria-label="Primary"
+          class="absolute inset-x-0 top-full hidden rounded-[10px] border-t-[3px] border-brand bg-white p-5 shadow-lg peer-checked:block lg:static lg:block lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
+        >
+          <ul class="lg:flex lg:items-center">
+            <li class="group relative">
+              <a href="#main" class="nav-link">Home</a>
+            </li>
+            <li class="group relative">
+              <a href="#about" class="nav-link">About</a>
+            </li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <a
+          href="/"
+          aria-label="Channah Ltd home"
+          class="flex items-center gap-3 lg:absolute lg:left-1/2 lg:-translate-x-1/2"
+        >
+          <svg class="size-11" aria-hidden="true"><use href="#i-logo" /></svg>
+          <span
+            class="font-heading text-[28px] font-bold tracking-tight text-ink"
+            >Channah</span
+          >
+        </a>
+
+        <div class="flex items-center">
+          <a
+            href="tel:+254733330134"
+            class="mr-[30px] hidden items-center xl:flex"
+          >
+            <span
+              class="mr-2 flex size-[50px] shrink-0 items-center justify-center rounded-full bg-white text-brand"
+            >
+              <svg class="icon size-[22px]" aria-hidden="true">
+                <use href="#i-phone" />
+              </svg>
+            </span>
+            <span
+              class="whitespace-nowrap font-heading text-[15px] font-bold leading-6 text-ink"
+              >+254 733 330 134</span
+            >
+          </a>
+          <a
+            href="#contact"
+            class="btn group hidden bg-brand text-ink hover:bg-ink hover:text-white lg:inline-flex"
+          >
+            Get in Touch
+            <span class="btn-icon bg-white text-ink">
+              <span class="arrow-swap">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-arrow" />
+                </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-arrow" />
+                </svg>
+              </span>
+            </span>
+          </a>
+          <label
+            for="nav-toggle"
+            class="-mr-2 cursor-pointer rounded-lg p-2 text-ink group-has-[#nav-toggle:focus-visible]/header:ring-2 group-has-[#nav-toggle:focus-visible]/header:ring-brand lg:hidden"
+          >
+            <svg class="icon size-8" aria-hidden="true">
+              <use href="#i-menu" />
+            </svg>
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============================== Hero ==============================
+           CSS-only slider: each dot is a <label> wrapping a radio; the checked radio's
+           id decides which slide is visible via group-has-[...]. -->
+      <section
+        aria-label="Highlights"
+        class="group/hero relative h-[400px] overflow-hidden rounded-[20px] sm:h-[500px] sm:rounded-[25px] md:h-[600px] lg:mx-5 lg:h-[850px] xl:mx-[50px]"
+      >
+        <article
+          class="invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-1:checked]/hero:visible group-has-[#hero-1:checked]/hero:opacity-100"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
+            alt=""
+            fetchpriority="high"
+            class="cover"
+          />
+          <div class="absolute inset-0 bg-ink/60"></div>
+          <div class="relative">
+            <p
+              class="inline-block rounded-full border border-white px-[15px] py-0.5 font-heading text-[10px] font-semibold uppercase leading-[18px] tracking-[0.5px] text-white sm:px-5 sm:text-xs sm:leading-5 sm:tracking-[1.2px]"
+            >
+              Infrastructure • Technology • Trade
+            </p>
+            <h1 class="hero-title">
+              Engineering a sustainable<br />and connected future
+            </h1>
+            <a
+              href="#services"
+              class="btn group bg-white text-ink hover:bg-brand"
+            >
+              Explore Our Services
+              <span class="btn-icon bg-brand text-white group-hover:bg-ink">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <article
+          class="invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-2:checked]/hero:visible group-has-[#hero-2:checked]/hero:opacity-100"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1531256379416-9f000e90aacc?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
+            alt=""
+            loading="lazy"
+            class="cover"
+          />
+          <div class="absolute inset-0 bg-ink/60"></div>
+          <div class="relative">
+            <p
+              class="inline-block rounded-full border border-white px-[15px] py-0.5 font-heading text-[10px] font-semibold uppercase leading-[18px] tracking-[0.5px] text-white sm:px-5 sm:text-xs sm:leading-5 sm:tracking-[1.2px]"
+            >
+              Telecommunications &amp; ICT
+            </p>
+            <h2 class="hero-title">
+              Reliable networks.<br />Disciplined delivery.
+            </h2>
+            <a
+              href="#contact"
+              class="btn group bg-white text-ink hover:bg-brand"
+            >
+              Talk to Our Team
+              <span class="btn-icon bg-brand text-white group-hover:bg-ink">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <article
+          class="invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-3:checked]/hero:visible group-has-[#hero-3:checked]/hero:opacity-100"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
+            alt=""
+            loading="lazy"
+            class="cover"
+          />
+          <div class="absolute inset-0 bg-ink/60"></div>
+          <div class="relative">
+            <p
+              class="inline-block rounded-full border border-white px-[15px] py-0.5 font-heading text-[10px] font-semibold uppercase leading-[18px] tracking-[0.5px] text-white sm:px-5 sm:text-xs sm:leading-5 sm:tracking-[1.2px]"
+            >
+              Construction &amp; Electrical
+            </p>
+            <h2 class="hero-title">
+              From planning through<br />project acceptance
+            </h2>
+            <a
+              href="#projects"
+              class="btn group bg-white text-ink hover:bg-brand"
+            >
+              View Our Work
+              <span class="btn-icon bg-brand text-white group-hover:bg-ink">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <div
+          role="radiogroup"
+          aria-label="Choose slide"
+          class="absolute right-0 top-1/2 flex -translate-y-1/2 flex-col gap-2.5 rounded-l-[25px] bg-mist px-3 py-5 md:px-4 md:py-7"
+        >
+          <label
+            class="block size-3 cursor-pointer rounded-full bg-ink/25 transition-colors has-[:checked]:bg-brand has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ink has-[:focus-visible]:ring-offset-2"
+          >
+            <input
+              type="radio"
+              name="hero-slide"
+              id="hero-1"
+              class="sr-only"
+              checked
+            />
+            <span class="sr-only">Slide 1</span>
+          </label>
+          <label
+            class="block size-3 cursor-pointer rounded-full bg-ink/25 transition-colors has-[:checked]:bg-brand has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ink has-[:focus-visible]:ring-offset-2"
+          >
+            <input type="radio" name="hero-slide" id="hero-2" class="sr-only" />
+            <span class="sr-only">Slide 2</span>
+          </label>
+          <label
+            class="block size-3 cursor-pointer rounded-full bg-ink/25 transition-colors has-[:checked]:bg-brand has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ink has-[:focus-visible]:ring-offset-2"
+          >
+            <input type="radio" name="hero-slide" id="hero-3" class="sr-only" />
+            <span class="sr-only">Slide 3</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- ============================== Feature cards ============================== -->
+      <section aria-label="Why Channah" class="px-5 pt-10 xl:px-10">
+        <div
+          class="grid gap-[15px] md:grid-cols-2 lg:gap-[35px] xl:grid-cols-4"
+        >
+          <a
+            href="/about-us"
+            class="group relative block rounded-[25px] bg-white px-5 pb-[70px] pt-[30px] sm:px-[30px] sm:pt-[45px]"
+          >
+            <div
+              class="relative mb-4 border-b border-[#c0cbd5] pb-[15px] xl:mb-[22px] xl:pb-5"
+            >
+              <svg
+                class="icon size-[50px] stroke-[1.5] text-brand"
+                aria-hidden="true"
+              >
+                <use href="#i-zap" />
+              </svg>
+              <span
+                class="absolute -bottom-1.5 right-0 size-3 rounded-full bg-[#c0cbd5]"
+              ></span>
+              <span
+                class="absolute -bottom-px left-0 h-px w-0 bg-ink transition-[width] duration-500 group-hover:w-full"
+              ></span>
+            </div>
+            <h2
+              class="mb-[15px] text-2xl font-bold leading-7 tracking-[-0.28px] xl:mb-5"
+            >
+              Technical Expertise
+            </h2>
+            <p class="2xl:pr-10">
+              Field-tested capability across telecom, energy, construction,
+              electrical and security systems.
+            </p>
+            <span class="notch">
+              <span class="round-btn bg-white text-ink">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </a>
+
+          <a
+            href="/about-us"
+            class="group relative block rounded-[25px] bg-white px-5 pb-[70px] pt-[30px] sm:px-[30px] sm:pt-[45px]"
+          >
+            <div
+              class="relative mb-4 border-b border-[#c0cbd5] pb-[15px] xl:mb-[22px] xl:pb-5"
+            >
+              <svg
+                class="icon size-[50px] stroke-[1.5] text-brand"
+                aria-hidden="true"
+              >
+                <use href="#i-target" />
+              </svg>
+              <span
+                class="absolute -bottom-1.5 right-0 size-3 rounded-full bg-[#c0cbd5]"
+              ></span>
+              <span
+                class="absolute -bottom-px left-0 h-px w-0 bg-ink transition-[width] duration-500 group-hover:w-full"
+              ></span>
+            </div>
+            <h2
+              class="mb-[15px] text-2xl font-bold leading-7 tracking-[-0.28px] xl:mb-5"
+            >
+              Tailored Solutions
+            </h2>
+            <p class="2xl:pr-10">
+              Practical solutions shaped around each client’s project
+              requirements and operating environment.
+            </p>
+            <span class="notch">
+              <span class="round-btn bg-white text-ink">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </a>
+
+          <a
+            href="/about-us"
+            class="group relative block rounded-[25px] bg-white px-5 pb-[70px] pt-[30px] sm:px-[30px] sm:pt-[45px]"
+          >
+            <div
+              class="relative mb-4 border-b border-[#c0cbd5] pb-[15px] xl:mb-[22px] xl:pb-5"
+            >
+              <svg
+                class="icon size-[50px] stroke-[1.5] text-brand"
+                aria-hidden="true"
+              >
+                <use href="#i-award" />
+              </svg>
+              <span
+                class="absolute -bottom-1.5 right-0 size-3 rounded-full bg-[#c0cbd5]"
+              ></span>
+              <span
+                class="absolute -bottom-px left-0 h-px w-0 bg-ink transition-[width] duration-500 group-hover:w-full"
+              ></span>
+            </div>
+            <h2
+              class="mb-[15px] text-2xl font-bold leading-7 tracking-[-0.28px] xl:mb-5"
+            >
+              Quality Assurance
+            </h2>
+            <p class="2xl:pr-10">
+              High standards, appropriate materials and quality controls from
+              planning through execution.
+            </p>
+            <span class="notch">
+              <span class="round-btn bg-white text-ink">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </a>
+
+          <a
+            href="/about-us"
+            class="group relative block rounded-[25px] bg-white px-5 pb-[70px] pt-[30px] sm:px-[30px] sm:pt-[45px]"
+          >
+            <div
+              class="relative mb-4 border-b border-[#c0cbd5] pb-[15px] xl:mb-[22px] xl:pb-5"
+            >
+              <svg
+                class="icon size-[50px] stroke-[1.5] text-brand"
+                aria-hidden="true"
+              >
+                <use href="#i-trending-up" />
+              </svg>
+              <span
+                class="absolute -bottom-1.5 right-0 size-3 rounded-full bg-[#c0cbd5]"
+              ></span>
+              <span
+                class="absolute -bottom-px left-0 h-px w-0 bg-ink transition-[width] duration-500 group-hover:w-full"
+              ></span>
+            </div>
+            <h2
+              class="mb-[15px] text-2xl font-bold leading-7 tracking-[-0.28px] xl:mb-5"
+            >
+              Project Discipline
+            </h2>
+            <p class="2xl:pr-10">
+              Accountable coordination, safety and procurement support for
+              dependable end-to-end delivery.
+            </p>
+            <span class="notch">
+              <span class="round-btn bg-white text-ink">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================== About (tabs) ============================== -->
+      <section
+        id="about"
+        class="px-5 pt-[60px] md:pt-20 lg:pt-[100px] xl:px-[55px]"
+      >
+        <div class="lg:flex lg:gap-[30px] xl:gap-[55px]">
+          <div
+            class="relative h-[400px] overflow-hidden rounded-[30px] sm:h-[550px] lg:h-auto lg:w-1/2"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&amp;fit=crop&amp;w=1080&amp;q=80"
+              alt="Modern project office"
+              loading="lazy"
+              class="cover"
+            />
+          </div>
+
+          <div class="pt-[30px] lg:w-1/2 lg:max-w-[660px] lg:py-[42px]">
+            <header class="mb-10 lg:mb-[50px]">
+              <p class="eyebrow">Who we are</p>
+              <h2 class="section-title">
+                Integrated solutions for a
+                <span class="text-brand">connected future.</span>
+              </h2>
+            </header>
+
+            <!-- CSS-only tabs: radios inside the labels, panels keyed off the checked id. -->
+            <div class="group/about">
+              <div
+                role="radiogroup"
+                aria-label="About Channah"
+                class="mb-[25px] border-b border-ink/10 pb-[15px] sm:mb-[30px] sm:flex sm:gap-4 sm:pb-[30px] lg:mb-10 lg:pb-10"
+              >
+                <label class="tab"
+                  ><input
+                    type="radio"
+                    name="about-tab"
+                    id="about-mission"
+                    class="sr-only"
+                    checked
+                  />Our Mission</label
+                >
+                <label class="tab"
+                  ><input
+                    type="radio"
+                    name="about-tab"
+                    id="about-vision"
+                    class="sr-only"
+                  />Our Vision</label
+                >
+                <label class="tab"
+                  ><input
+                    type="radio"
+                    name="about-tab"
+                    id="about-history"
+                    class="sr-only"
+                  />Our Strategy</label
+                >
+              </div>
+
+              <div
+                class="hidden group-has-[#about-mission:checked]/about:block sm:gap-5 sm:group-has-[#about-mission:checked]/about:flex lg:gap-[34px]"
+              >
+                <div
+                  class="relative h-[300px] overflow-hidden rounded-[25px] sm:h-auto sm:w-2/5 sm:shrink-0"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1080&q=80"
+                    alt="Engineer reviewing technical drawings"
+                    loading="lazy"
+                    class="cover"
+                  />
+                </div>
+                <div class="pt-[15px] sm:pb-[5px]">
+                  <p>
+                    To deliver exceptional construction, green energy, network
+                    installation and security services by combining expertise,
+                    technology and a commitment to customer satisfaction.
+                  </p>
+                  <ul class="mt-[30px] space-y-[15px]">
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Tailored, high-quality solutions
+                    </li>
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Technical precision
+                    </li>
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Customer-focused delivery
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                class="hidden group-has-[#about-vision:checked]/about:block sm:gap-5 sm:group-has-[#about-vision:checked]/about:flex lg:gap-[34px]"
+              >
+                <div
+                  class="relative h-[300px] overflow-hidden rounded-[25px] sm:h-auto sm:w-2/5 sm:shrink-0"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1080&q=80"
+                    alt="CAD model of a plant layout on a monitor"
+                    loading="lazy"
+                    class="cover"
+                  />
+                </div>
+                <div class="pt-[15px] sm:pb-[5px]">
+                  <p>
+                    To be a leading provider of innovative trade, infrastructure
+                    and technology solutions, building a sustainable and
+                    connected future across the region.
+                  </p>
+                  <ul class="mt-[30px] space-y-[15px]">
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Innovation and sustainability
+                    </li>
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Regional impact
+                    </li>
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Connected communities
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                class="hidden group-has-[#about-history:checked]/about:block sm:gap-5 sm:group-has-[#about-history:checked]/about:flex lg:gap-[34px]"
+              >
+                <div
+                  class="relative h-[300px] overflow-hidden rounded-[25px] sm:h-auto sm:w-2/5 sm:shrink-0"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=1080&q=80"
+                    alt="Industrial plant with towers and chimneys"
+                    loading="lazy"
+                    class="cover"
+                  />
+                </div>
+                <div class="pt-[15px] sm:pb-[5px]">
+                  <p>
+                    We build strong client focus through a clear understanding
+                    of needs and markets, anticipating change and responding to
+                    industry turning points.
+                  </p>
+                  <ul class="mt-[30px] space-y-[15px]">
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Market-aware planning
+                    </li>
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Disciplined coordination
+                    </li>
+                    <li class="check-item">
+                      <svg class="icon check-badge" aria-hidden="true">
+                        <use href="#i-check" /></svg
+                      >Long-term client value
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-[30px] flex flex-wrap items-center gap-x-10 gap-y-5">
+              <a
+                href="#services"
+                class="btn group border border-ink text-ink hover:bg-ink hover:text-white"
+              >
+                Our Services
+                <span class="btn-icon bg-brand text-white">
+                  <span class="arrow-swap">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                    <svg class="icon" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                  </span>
+                </span>
+              </a>
+              <a href="tel:+254733330134" class="flex items-center">
+                <span
+                  class="mr-5 flex size-[66px] shrink-0 items-center justify-center rounded-full bg-ink text-white"
+                >
+                  <svg class="icon size-7" aria-hidden="true">
+                    <use href="#i-phone" />
+                  </svg>
+                </span>
+                <span>
+                  <span
+                    class="block font-heading text-base leading-5 text-brand"
+                    >Have question?</span
+                  >
+                  <span class="block leading-5">Call +254 733 330 134</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== Marquee ============================== -->
+      <div
+        class="flex overflow-hidden py-[30px] md:pb-[60px] md:pt-10 lg:pb-20 lg:pt-[70px]"
+      >
+        <div class="marquee-track">
+          <span class="marquee-text">Infrastructure</span>
+          <span class="marquee-badge"
+            ><svg class="icon size-5 lg:size-[30px]" aria-hidden="true">
+              <use href="#i-arrow" /></svg
+          ></span>
+          <span class="marquee-text">Telecommunications</span>
+          <span class="marquee-badge"
+            ><svg class="icon size-5 lg:size-[30px]" aria-hidden="true">
+              <use href="#i-arrow" /></svg
+          ></span>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <span class="marquee-text">Renewable Energy</span>
+          <span class="marquee-badge"
+            ><svg class="icon size-5 lg:size-[30px]">
+              <use href="#i-arrow" /></svg
+          ></span>
+          <span class="marquee-text">Construction</span>
+          <span class="marquee-badge"
+            ><svg class="icon size-5 lg:size-[30px]">
+              <use href="#i-arrow" /></svg
+          ></span>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <span class="marquee-text">Electrical</span>
+          <span class="marquee-badge"
+            ><svg class="icon size-5 lg:size-[30px]">
+              <use href="#i-arrow" /></svg
+          ></span>
+          <span class="marquee-text">Security</span>
+          <span class="marquee-badge"
+            ><svg class="icon size-5 lg:size-[30px]">
+              <use href="#i-arrow" /></svg
+          ></span>
+        </div>
+      </div>
+
+      <!-- ============================== Services ==============================
+           Below lg all six cards show as a grid. From lg up it becomes a two-page
+           pager: the arrow labels flip the radio, which swaps cards 1–3 for 4–6. -->
+      <section
+        id="services"
+        class="group/services rounded-[30px] bg-ink py-[60px] [--notch:#fff] md:mx-5 md:py-20 lg:mx-[30px] lg:py-[100px]"
+      >
+        <div class="shell">
+          <div class="mb-10 lg:mb-[30px] lg:flex lg:items-center">
+            <header class="mb-5 lg:mb-0 lg:w-1/2">
+              <p class="eyebrow border-white/20">Our Services</p>
+              <h2 class="section-title text-white">
+                Engineering <span class="text-brand">Practical Solutions</span
+                ><br />Across Sectors
+              </h2>
+            </header>
+            <div class="lg:w-1/3">
+              <p class="text-white/90">
+                Technical capability, field execution, quality assurance and
+                procurement support in one delivery model.
+              </p>
+              <a href="#contact" class="text-link text-[15px] leading-[18px]"
+                >Start a conversation.</a
+              >
+            </div>
+            <div
+              role="radiogroup"
+              aria-label="Services page"
+              class="hidden justify-end gap-2 lg:flex lg:w-1/6"
+            >
+              <label class="pager-btn bg-white text-ink">
+                <input
+                  type="radio"
+                  name="services-page"
+                  id="services-page-1"
+                  class="sr-only"
+                  checked
+                />
+                <span class="sr-only">Show services 1 to 3</span>
+                <svg class="icon size-5" aria-hidden="true">
+                  <use href="#i-chevron-left" />
+                </svg>
+              </label>
+              <label class="pager-btn bg-brand text-white">
+                <input
+                  type="radio"
+                  name="services-page"
+                  id="services-page-2"
+                  class="sr-only"
+                />
+                <span class="sr-only">Show services 4 to 6</span>
+                <svg class="icon size-5" aria-hidden="true">
+                  <use href="#i-chevron-right" />
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-[30px]">
+            <li class="lg:group-has-[#services-page-2:checked]/services:hidden">
+              <a
+                href="/services/personalized-fabrication"
+                class="group block h-full rounded-[30px] bg-white p-2.5"
+              >
+                <div class="relative h-[260px] overflow-hidden rounded-[25px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <span
+                    class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2"
+                  >
+                    <span class="round-btn bg-brand text-white">
+                      <span class="arrow-swap">
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  class="px-2.5 pb-5 pt-[30px] sm:px-5 sm:pb-[30px] lg:px-2.5 lg:py-10 xl:px-6"
+                >
+                  <div
+                    class="mb-5 border-b border-ink/[0.08] pb-5 sm:flex sm:items-center"
+                  >
+                    <span
+                      class="mb-[15px] flex size-[70px] shrink-0 items-center justify-center rounded-[20px] bg-[#f7f7f7] text-brand sm:mb-0 sm:mr-[22px]"
+                    >
+                      <svg class="icon size-9 stroke-[1.5]" aria-hidden="true">
+                        <use href="#i-tool" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p class="kicker mb-1.5 text-brand">Technology</p>
+                      <h3
+                        class="text-[22px] font-semibold leading-[26px] transition-colors group-hover:text-brand"
+                      >
+                        ICT Consultancy
+                      </h3>
+                    </div>
+                  </div>
+                  <p>
+                    Strategy, assessment, procurement, audits and project
+                    management for technology implementation.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="lg:group-has-[#services-page-2:checked]/services:hidden">
+              <a
+                href="/services/making-steel-structures"
+                class="group block h-full rounded-[30px] bg-white p-2.5"
+              >
+                <div class="relative h-[260px] overflow-hidden rounded-[25px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <span
+                    class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2"
+                  >
+                    <span class="round-btn bg-brand text-white">
+                      <span class="arrow-swap">
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  class="px-2.5 pb-5 pt-[30px] sm:px-5 sm:pb-[30px] lg:px-2.5 lg:py-10 xl:px-6"
+                >
+                  <div
+                    class="mb-5 border-b border-ink/[0.08] pb-5 sm:flex sm:items-center"
+                  >
+                    <span
+                      class="mb-[15px] flex size-[70px] shrink-0 items-center justify-center rounded-[20px] bg-[#f7f7f7] text-brand sm:mb-0 sm:mr-[22px]"
+                    >
+                      <svg class="icon size-9 stroke-[1.5]" aria-hidden="true">
+                        <use href="#i-layers" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p class="kicker mb-1.5 text-brand">Infrastructure</p>
+                      <h3
+                        class="text-[22px] font-semibold leading-[26px] transition-colors group-hover:text-brand"
+                      >
+                        Building &amp; Construction
+                      </h3>
+                    </div>
+                  </div>
+                  <p>
+                    Residential, commercial and industrial construction, civil
+                    works, drainage, roads and structural steel.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="lg:group-has-[#services-page-2:checked]/services:hidden">
+              <a
+                href="/services/industrial-metalworking"
+                class="group block h-full rounded-[30px] bg-white p-2.5"
+              >
+                <div class="relative h-[260px] overflow-hidden rounded-[25px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <span
+                    class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2"
+                  >
+                    <span class="round-btn bg-brand text-white">
+                      <span class="arrow-swap">
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  class="px-2.5 pb-5 pt-[30px] sm:px-5 sm:pb-[30px] lg:px-2.5 lg:py-10 xl:px-6"
+                >
+                  <div
+                    class="mb-5 border-b border-ink/[0.08] pb-5 sm:flex sm:items-center"
+                  >
+                    <span
+                      class="mb-[15px] flex size-[70px] shrink-0 items-center justify-center rounded-[20px] bg-[#f7f7f7] text-brand sm:mb-0 sm:mr-[22px]"
+                    >
+                      <svg class="icon size-9 stroke-[1.5]" aria-hidden="true">
+                        <use href="#i-box" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p class="kicker mb-1.5 text-brand">Networks</p>
+                      <h3
+                        class="text-[22px] font-semibold leading-[26px] transition-colors group-hover:text-brand"
+                      >
+                        Telecom Solutions
+                      </h3>
+                    </div>
+                  </div>
+                  <p>
+                    RAN, microwave, core network, fibre, data centre and BTS
+                    power installations and maintenance.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li
+              class="lg:hidden lg:group-has-[#services-page-2:checked]/services:block"
+            >
+              <a
+                href="/services/highly-regulated-industry"
+                class="group block h-full rounded-[30px] bg-white p-2.5"
+              >
+                <div class="relative h-[260px] overflow-hidden rounded-[25px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <span
+                    class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2"
+                  >
+                    <span class="round-btn bg-brand text-white">
+                      <span class="arrow-swap">
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  class="px-2.5 pb-5 pt-[30px] sm:px-5 sm:pb-[30px] lg:px-2.5 lg:py-10 xl:px-6"
+                >
+                  <div
+                    class="mb-5 border-b border-ink/[0.08] pb-5 sm:flex sm:items-center"
+                  >
+                    <span
+                      class="mb-[15px] flex size-[70px] shrink-0 items-center justify-center rounded-[20px] bg-[#f7f7f7] text-brand sm:mb-0 sm:mr-[22px]"
+                    >
+                      <svg class="icon size-9 stroke-[1.5]" aria-hidden="true">
+                        <use href="#i-shield" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p class="kicker mb-1.5 text-brand">Clean Energy</p>
+                      <h3
+                        class="text-[22px] font-semibold leading-[26px] transition-colors group-hover:text-brand"
+                      >
+                        Renewable Energy
+                      </h3>
+                    </div>
+                  </div>
+                  <p>
+                    Solar PV design, BTS hybrid systems, commercial
+                    installations and energy optimization.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li
+              class="lg:hidden lg:group-has-[#services-page-2:checked]/services:block"
+            >
+              <a
+                href="/services/services-for-rolling-mills"
+                class="group block h-full rounded-[30px] bg-white p-2.5"
+              >
+                <div class="relative h-[260px] overflow-hidden rounded-[25px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <span
+                    class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2"
+                  >
+                    <span class="round-btn bg-brand text-white">
+                      <span class="arrow-swap">
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  class="px-2.5 pb-5 pt-[30px] sm:px-5 sm:pb-[30px] lg:px-2.5 lg:py-10 xl:px-6"
+                >
+                  <div
+                    class="mb-5 border-b border-ink/[0.08] pb-5 sm:flex sm:items-center"
+                  >
+                    <span
+                      class="mb-[15px] flex size-[70px] shrink-0 items-center justify-center rounded-[20px] bg-[#f7f7f7] text-brand sm:mb-0 sm:mr-[22px]"
+                    >
+                      <svg class="icon size-9 stroke-[1.5]" aria-hidden="true">
+                        <use href="#i-refresh" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p class="kicker mb-1.5 text-brand">Protection</p>
+                      <h3
+                        class="text-[22px] font-semibold leading-[26px] transition-colors group-hover:text-brand"
+                      >
+                        Security Systems
+                      </h3>
+                    </div>
+                  </div>
+                  <p>
+                    CCTV, access control, alarms and electric-fence installation
+                    and maintenance.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li
+              class="lg:hidden lg:group-has-[#services-page-2:checked]/services:block"
+            >
+              <a
+                href="/services/the-production-of-steel"
+                class="group block h-full rounded-[30px] bg-white p-2.5"
+              >
+                <div class="relative h-[260px] overflow-hidden rounded-[25px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <span
+                    class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2"
+                  >
+                    <span class="round-btn bg-brand text-white">
+                      <span class="arrow-swap">
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#i-arrow" />
+                        </svg>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  class="px-2.5 pb-5 pt-[30px] sm:px-5 sm:pb-[30px] lg:px-2.5 lg:py-10 xl:px-6"
+                >
+                  <div
+                    class="mb-5 border-b border-ink/[0.08] pb-5 sm:flex sm:items-center"
+                  >
+                    <span
+                      class="mb-[15px] flex size-[70px] shrink-0 items-center justify-center rounded-[20px] bg-[#f7f7f7] text-brand sm:mb-0 sm:mr-[22px]"
+                    >
+                      <svg class="icon size-9 stroke-[1.5]" aria-hidden="true">
+                        <use href="#i-database" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p class="kicker mb-1.5 text-brand">Power &amp; Supply</p>
+                      <h3
+                        class="text-[22px] font-semibold leading-[26px] transition-colors group-hover:text-brand"
+                      >
+                        Electrical &amp; General Trade
+                      </h3>
+                    </div>
+                  </div>
+                  <p>
+                    Commercial electrical installations, Last Mile connectivity
+                    and reliable project supplies.
+                  </p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============================== Process steps ============================== -->
+      <section class="pt-[60px] md:pt-20 lg:pt-[100px]">
+        <div class="shell">
+          <header class="mb-5 text-center md:mb-[50px]">
+            <p class="eyebrow">How We Deliver</p>
+            <h2 class="section-title">
+              Disciplined Delivery From<br /><span class="text-brand"
+                >Planning to Acceptance</span
+              >
+            </h2>
+          </header>
+
+          <ol
+            class="grid gap-[30px] md:grid-cols-2 lg:grid-cols-4 xl:gap-[50px]"
+          >
+            <li class="lg:border-r lg:border-ink/10 lg:pr-[30px] xl:pr-[50px]">
+              <div class="relative mb-[15px] rounded-[20px] md:mb-8">
+                <p
+                  aria-hidden="true"
+                  class="font-heading text-[70px] font-bold leading-[55px] text-ink/15 sm:text-[80px] sm:leading-[65px] lg:text-[105px] lg:leading-[82px]"
+                >
+                  01
+                </p>
+                <p
+                  class="absolute left-0 top-1/2 -translate-y-1/2 bg-mist px-1.5 py-0.5 font-heading text-xs font-bold uppercase tracking-[1.8px] text-brand sm:text-sm lg:px-2.5 lg:py-[3px] lg:text-lg lg:leading-[22px]"
+                >
+                  Step <span class="sr-only">1</span>
+                </p>
+              </div>
+              <h3
+                class="mb-2 text-lg font-semibold leading-[22px] sm:text-[22px] sm:leading-7 lg:mb-3"
+              >
+                Plan &amp; Assess
+              </h3>
+              <p>
+                Define requirements, scope, risks and the right technical
+                approach.
+              </p>
+            </li>
+            <li class="lg:border-r lg:border-ink/10 lg:pr-[30px] xl:pr-[50px]">
+              <div class="relative mb-[15px] rounded-[20px] md:mb-8">
+                <p
+                  aria-hidden="true"
+                  class="font-heading text-[70px] font-bold leading-[55px] text-ink/15 sm:text-[80px] sm:leading-[65px] lg:text-[105px] lg:leading-[82px]"
+                >
+                  02
+                </p>
+                <p
+                  class="absolute left-0 top-1/2 -translate-y-1/2 bg-mist px-1.5 py-0.5 font-heading text-xs font-bold uppercase tracking-[1.8px] text-brand sm:text-sm lg:px-2.5 lg:py-[3px] lg:text-lg lg:leading-[22px]"
+                >
+                  Step <span class="sr-only">2</span>
+                </p>
+              </div>
+              <h3
+                class="mb-2 text-lg font-semibold leading-[22px] sm:text-[22px] sm:leading-7 lg:mb-3"
+              >
+                Mobilize Resources
+              </h3>
+              <p>
+                Deploy qualified engineers, technicians, supervisors and project
+                support.
+              </p>
+            </li>
+            <li class="lg:border-r lg:border-ink/10 lg:pr-[30px] xl:pr-[50px]">
+              <div class="relative mb-[15px] rounded-[20px] md:mb-8">
+                <p
+                  aria-hidden="true"
+                  class="font-heading text-[70px] font-bold leading-[55px] text-ink/15 sm:text-[80px] sm:leading-[65px] lg:text-[105px] lg:leading-[82px]"
+                >
+                  03
+                </p>
+                <p
+                  class="absolute left-0 top-1/2 -translate-y-1/2 bg-mist px-1.5 py-0.5 font-heading text-xs font-bold uppercase tracking-[1.8px] text-brand sm:text-sm lg:px-2.5 lg:py-[3px] lg:text-lg lg:leading-[22px]"
+                >
+                  Step <span class="sr-only">3</span>
+                </p>
+              </div>
+              <h3
+                class="mb-2 text-lg font-semibold leading-[22px] sm:text-[22px] sm:leading-7 lg:mb-3"
+              >
+                Execute Safely
+              </h3>
+              <p>
+                Coordinate field work with quality, EHS and compliance controls
+                embedded.
+              </p>
+            </li>
+            <li>
+              <div class="relative mb-[15px] rounded-[20px] md:mb-8">
+                <p
+                  aria-hidden="true"
+                  class="font-heading text-[70px] font-bold leading-[55px] text-ink/15 sm:text-[80px] sm:leading-[65px] lg:text-[105px] lg:leading-[82px]"
+                >
+                  04
+                </p>
+                <p
+                  class="absolute left-0 top-1/2 -translate-y-1/2 bg-mist px-1.5 py-0.5 font-heading text-xs font-bold uppercase tracking-[1.8px] text-brand sm:text-sm lg:px-2.5 lg:py-[3px] lg:text-lg lg:leading-[22px]"
+                >
+                  Step <span class="sr-only">4</span>
+                </p>
+              </div>
+              <h3
+                class="mb-2 text-lg font-semibold leading-[22px] sm:text-[22px] sm:leading-7 lg:mb-3"
+              >
+                Verify &amp; Accept
+              </h3>
+              <p>
+                Test, document and hand over work that meets project
+                expectations.
+              </p>
+            </li>
+          </ol>
+
+          <p
+            class="mt-5 font-heading text-lg font-medium leading-[22px] text-ink md:text-center lg:mt-[52px]"
+          >
+            Ready to move your project forward?
+            <a href="#contact" class="text-link">Talk to Channah.</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- ============================== Team ============================== -->
+      <section
+        id="team"
+        class="hidden pb-20 pt-[70px] lg:pb-[120px] lg:pt-[90px]"
+      >
+        <div class="shell">
+          <h2
+            class="text-center text-[30px] font-extrabold uppercase leading-[38px] text-ink/[0.07] sm:mb-5 sm:text-[50px] sm:leading-[60px] md:text-[70px] md:leading-[80px] lg:mb-[60px] lg:text-[100px] lg:leading-[110px] xl:text-[146px] xl:leading-[146px] xl:tracking-[-3.75px]"
+          >
+            Industry experts
+          </h2>
+
+          <!-- From md up the portrait is revealed on hover/focus; on small screens it is always shown. -->
+          <ul>
+            <li>
+              <a
+                href="/team/sony-miltar"
+                class="group relative block border-b border-ink/10 py-[25px] hover:z-10 focus-visible:z-10 md:flex md:items-center md:justify-between"
+              >
+                <div class="mb-[25px] md:mb-0 lg:flex lg:items-center">
+                  <span
+                    class="mr-2.5 inline-block rounded-full border border-ink/10 px-3.5 py-2.5 text-xs font-semibold leading-3 tracking-[1.2px] text-ink xl:px-[18px]"
+                    >003</span
+                  >
+                  <h3
+                    class="my-2 text-xl font-semibold leading-7 transition-colors group-hover:text-brand sm:text-[35px] sm:leading-[35px] lg:my-0 lg:mr-[15px] lg:text-[40px] lg:leading-[64px] xl:mr-5 xl:text-[54px]"
+                  >
+                    Sony Miltar
+                  </h3>
+                  <p class="kicker text-ink/80 lg:self-end lg:pb-2.5">
+                    <span class="mr-1.5">/</span>Industrial Manager
+                  </p>
+                </div>
+                <div
+                  class="relative mb-5 h-[300px] overflow-hidden rounded-[25px] sm:h-[400px] md:pointer-events-none md:absolute md:right-[15%] md:top-1/2 md:mb-0 md:h-[320px] md:w-[300px] md:-translate-y-1/2 md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100 md:group-focus-visible:opacity-100 xl:h-[350px] xl:w-[325px]"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
+                    alt="Portrait of Sony Miltar"
+                    loading="lazy"
+                    class="cover"
+                  />
+                </div>
+                <span class="flex items-center gap-3 font-heading text-ink">
+                  Read More
+                  <svg
+                    class="icon size-[18px] text-brand transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/team/connor-grimes"
+                class="group relative block border-b border-ink/10 py-[25px] hover:z-10 focus-visible:z-10 md:flex md:items-center md:justify-between"
+              >
+                <div class="mb-[25px] md:mb-0 lg:flex lg:items-center">
+                  <span
+                    class="mr-2.5 inline-block rounded-full border border-ink/10 px-3.5 py-2.5 text-xs font-semibold leading-3 tracking-[1.2px] text-ink xl:px-[18px]"
+                    >005</span
+                  >
+                  <h3
+                    class="my-2 text-xl font-semibold leading-7 transition-colors group-hover:text-brand sm:text-[35px] sm:leading-[35px] lg:my-0 lg:mr-[15px] lg:text-[40px] lg:leading-[64px] xl:mr-5 xl:text-[54px]"
+                  >
+                    Connor Grimes
+                  </h3>
+                  <p class="kicker text-ink/80 lg:self-end lg:pb-2.5">
+                    <span class="mr-1.5">/</span>Team Manager
+                  </p>
+                </div>
+                <div
+                  class="relative mb-5 h-[300px] overflow-hidden rounded-[25px] sm:h-[400px] md:pointer-events-none md:absolute md:right-[15%] md:top-1/2 md:mb-0 md:h-[320px] md:w-[300px] md:-translate-y-1/2 md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100 md:group-focus-visible:opacity-100 xl:h-[350px] xl:w-[325px]"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+                    alt="Portrait of Connor Grimes"
+                    loading="lazy"
+                    class="cover"
+                  />
+                </div>
+                <span class="flex items-center gap-3 font-heading text-ink">
+                  Read More
+                  <svg
+                    class="icon size-[18px] text-brand transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/team/jake-nicholson"
+                class="group relative block border-b border-ink/10 py-[25px] hover:z-10 focus-visible:z-10 md:flex md:items-center md:justify-between"
+              >
+                <div class="mb-[25px] md:mb-0 lg:flex lg:items-center">
+                  <span
+                    class="mr-2.5 inline-block rounded-full border border-ink/10 px-3.5 py-2.5 text-xs font-semibold leading-3 tracking-[1.2px] text-ink xl:px-[18px]"
+                    >004</span
+                  >
+                  <h3
+                    class="my-2 text-xl font-semibold leading-7 transition-colors group-hover:text-brand sm:text-[35px] sm:leading-[35px] lg:my-0 lg:mr-[15px] lg:text-[40px] lg:leading-[64px] xl:mr-5 xl:text-[54px]"
+                  >
+                    Jake Nicholson
+                  </h3>
+                  <p class="kicker text-ink/80 lg:self-end lg:pb-2.5">
+                    <span class="mr-1.5">/</span>Sr. Engineer
+                  </p>
+                </div>
+                <div
+                  class="relative mb-5 h-[300px] overflow-hidden rounded-[25px] sm:h-[400px] md:pointer-events-none md:absolute md:right-[15%] md:top-1/2 md:mb-0 md:h-[320px] md:w-[300px] md:-translate-y-1/2 md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100 md:group-focus-visible:opacity-100 xl:h-[350px] xl:w-[325px]"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80"
+                    alt="Portrait of Jake Nicholson"
+                    loading="lazy"
+                    class="cover"
+                  />
+                </div>
+                <span class="flex items-center gap-3 font-heading text-ink">
+                  Read More
+                  <svg
+                    class="icon size-[18px] text-brand transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/team/bettie-schinner"
+                class="group relative block border-b border-ink/10 py-[25px] hover:z-10 focus-visible:z-10 md:flex md:items-center md:justify-between"
+              >
+                <div class="mb-[25px] md:mb-0 lg:flex lg:items-center">
+                  <span
+                    class="mr-2.5 inline-block rounded-full border border-ink/10 px-3.5 py-2.5 text-xs font-semibold leading-3 tracking-[1.2px] text-ink xl:px-[18px]"
+                    >006</span
+                  >
+                  <h3
+                    class="my-2 text-xl font-semibold leading-7 transition-colors group-hover:text-brand sm:text-[35px] sm:leading-[35px] lg:my-0 lg:mr-[15px] lg:text-[40px] lg:leading-[64px] xl:mr-5 xl:text-[54px]"
+                  >
+                    Bettie Schinner
+                  </h3>
+                  <p class="kicker text-ink/80 lg:self-end lg:pb-2.5">
+                    <span class="mr-1.5">/</span>Site Manager
+                  </p>
+                </div>
+                <div
+                  class="relative mb-5 h-[300px] overflow-hidden rounded-[25px] sm:h-[400px] md:pointer-events-none md:absolute md:right-[15%] md:top-1/2 md:mb-0 md:h-[320px] md:w-[300px] md:-translate-y-1/2 md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100 md:group-focus-visible:opacity-100 xl:h-[350px] xl:w-[325px]"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"
+                    alt="Portrait of Bettie Schinner"
+                    loading="lazy"
+                    class="cover"
+                  />
+                </div>
+                <span class="flex items-center gap-3 font-heading text-ink">
+                  Read More
+                  <svg
+                    class="icon size-[18px] text-brand transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/team/marko-daniel"
+                class="group relative block border-b border-ink/10 py-[25px] hover:z-10 focus-visible:z-10 md:flex md:items-center md:justify-between"
+              >
+                <div class="mb-[25px] md:mb-0 lg:flex lg:items-center">
+                  <span
+                    class="mr-2.5 inline-block rounded-full border border-ink/10 px-3.5 py-2.5 text-xs font-semibold leading-3 tracking-[1.2px] text-ink xl:px-[18px]"
+                    >002</span
+                  >
+                  <h3
+                    class="my-2 text-xl font-semibold leading-7 transition-colors group-hover:text-brand sm:text-[35px] sm:leading-[35px] lg:my-0 lg:mr-[15px] lg:text-[40px] lg:leading-[64px] xl:mr-5 xl:text-[54px]"
+                  >
+                    Marko Daniel
+                  </h3>
+                  <p class="kicker text-ink/80 lg:self-end lg:pb-2.5">
+                    <span class="mr-1.5">/</span>Chief Officer
+                  </p>
+                </div>
+                <div
+                  class="relative mb-5 h-[300px] overflow-hidden rounded-[25px] sm:h-[400px] md:pointer-events-none md:absolute md:right-[15%] md:top-1/2 md:mb-0 md:h-[320px] md:w-[300px] md:-translate-y-1/2 md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100 md:group-focus-visible:opacity-100 xl:h-[350px] xl:w-[325px]"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80"
+                    alt="Portrait of Marko Daniel"
+                    loading="lazy"
+                    class="cover"
+                  />
+                </div>
+                <span class="flex items-center gap-3 font-heading text-ink">
+                  Read More
+                  <svg
+                    class="icon size-[18px] text-brand transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============================== Video + FAQ ============================== -->
+      <section id="faq" class="px-2.5 lg:flex xl:px-[30px]">
+        <div class="mb-5 lg:mb-0 lg:w-[35%] lg:pr-5 2xl:w-2/5">
+          <div
+            class="relative h-[300px] overflow-hidden rounded-[25px] md:h-[400px] lg:h-full"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1080&q=80"
+              alt="Technician working on a circuit board"
+              loading="lazy"
+              class="cover"
+            />
+            <a
+              href="https://www.youtube.com/watch?v=d4DP8cSXUIQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="tab-notch group right-[12%] hidden items-center rounded-t-[25px] px-7 pb-2.5 pt-[15px] sm:flex"
+            >
+              <span
+                class="mr-[15px] flex size-10 items-center justify-center rounded-full border border-[#041f39] text-brand transition-colors group-hover:bg-brand group-hover:text-white"
+              >
+                <svg class="icon size-3.5 fill-current" aria-hidden="true">
+                  <use href="#i-play" />
+                </svg>
+              </span>
+              <span
+                class="font-heading text-base font-semibold leading-7 text-ink"
+                >Watch Video</span
+              >
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="rounded-[25px] bg-ink px-5 py-[50px] md:flex md:px-[30px] lg:w-[65%] lg:py-[100px] xl:py-[110px] xl:pl-[50px] 2xl:w-3/5 2xl:pl-[95px] 2xl:pr-[62px]"
+        >
+          <header class="mb-10 md:mb-0 md:w-[44%] xl:w-[39%]">
+            <p class="eyebrow border-white/20">Responsible Delivery</p>
+            <h2 class="section-title text-white">
+              Safety and stewardship in every project
+            </h2>
+          </header>
+
+          <!-- Native exclusive accordion: <details name="faq"> lets the browser close siblings. -->
+          <div
+            class="md:w-[56%] md:pl-[15px] md:pt-[34px] xl:w-[61%] xl:pl-[45px]"
+          >
+            <details name="faq" open class="group border-t border-white/10">
+              <summary
+                class="flex cursor-pointer list-none items-center justify-between gap-4 py-[22px] font-heading text-sm font-semibold leading-[22px] text-white md:text-base md:leading-[26px] xl:text-[17px] 2xl:text-[22px] [&::-webkit-details-marker]:hidden"
+              >
+                01. Environmental Stewardship
+                <svg
+                  class="icon size-5 transition-transform duration-300 group-open:rotate-180"
+                  aria-hidden="true"
+                >
+                  <use href="#i-chevron-down" />
+                </svg>
+              </summary>
+              <p class="pb-[22px] pl-2 pr-[5px] text-white/70">
+                We minimize environmental impact through sustainable practices,
+                waste reduction, optimized energy use and renewable-energy
+                adoption.
+              </p>
+            </details>
+            <details name="faq" class="group border-t border-white/10">
+              <summary
+                class="flex cursor-pointer list-none items-center justify-between gap-4 py-[22px] font-heading text-sm font-semibold leading-[22px] text-white md:text-base md:leading-[26px] xl:text-[17px] 2xl:text-[22px] [&::-webkit-details-marker]:hidden"
+              >
+                02. Health &amp; Safety Practices
+                <svg
+                  class="icon size-5 transition-transform duration-300 group-open:rotate-180"
+                  aria-hidden="true"
+                >
+                  <use href="#i-chevron-down" />
+                </svg>
+              </summary>
+              <p class="pb-[22px] pl-2 pr-[5px] text-white/70">
+                Safety protocols, hazard identification, emergency response and
+                regular training are central to our approach.
+              </p>
+            </details>
+            <details name="faq" class="group border-y border-white/10">
+              <summary
+                class="flex cursor-pointer list-none items-center justify-between gap-4 py-[22px] font-heading text-sm font-semibold leading-[22px] text-white md:text-base md:leading-[26px] xl:text-[17px] 2xl:text-[22px] [&::-webkit-details-marker]:hidden"
+              >
+                03. Compliance &amp; Improvement
+                <svg
+                  class="icon size-5 transition-transform duration-300 group-open:rotate-180"
+                  aria-hidden="true"
+                >
+                  <use href="#i-chevron-down" />
+                </svg>
+              </summary>
+              <p class="pb-[22px] pl-2 pr-[5px] text-white/70">
+                Audits, feedback and continuous improvement help protect people,
+                assets and the environment.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== Testimonials ==============================
+           Scroll-snap carousel: swipe / trackpad / keyboard arrows, no JS. -->
+      <section
+        id="testimonials"
+        class="hidden overflow-hidden pt-[60px] md:pt-20 lg:pt-[100px]"
+      >
+        <div class="shell">
+          <header class="mb-5 text-center md:mb-[50px]">
+            <p class="eyebrow">Customer Testimonials</p>
+            <h2 class="section-title">Words From Our Clients</h2>
+          </header>
+
+          <ul
+            tabindex="0"
+            aria-label="Customer testimonials"
+            class="-mx-5 mb-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 [scrollbar-width:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand lg:mb-[55px] lg:gap-[30px] [&::-webkit-scrollbar]:hidden"
+          >
+            <li class="w-full shrink-0 snap-center md:w-[46%] xl:w-[38%]">
+              <figure
+                class="relative h-full rounded-[25px] bg-white px-5 pb-[30px] pt-20 sm:pb-10 md:px-[25px] md:pt-[90px] xl:pl-10 xl:pr-[35px] xl:pt-[95px]"
+              >
+                <span
+                  class="tab-notch tab-notch--top left-[50px] rounded-b-[50%] px-2 pb-2"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="size-[60px] rounded-full object-cover md:size-[70px]"
+                  />
+                </span>
+                <blockquote
+                  class="font-heading text-base leading-[26px] sm:leading-[30px] md:text-lg md:leading-8"
+                >
+                  “I would recommend practitioners at this center to everyone!
+                  They are great to work with and are excellent trainers. Thank
+                  you all!”
+                </blockquote>
+                <figcaption
+                  class="mt-[15px] xl:mt-[30px] xl:flex xl:items-center xl:justify-between"
+                >
+                  <div class="mb-2.5 xl:mb-0">
+                    <p
+                      class="font-heading text-lg font-medium leading-[22px] text-ink sm:text-[22px] sm:leading-8 md:text-2xl md:leading-9"
+                    >
+                      Tina Johansson
+                    </p>
+                    <p class="leading-[18px] text-brand sm:leading-[26px]">
+                      Client, USA
+                    </p>
+                  </div>
+                  <div
+                    class="flex gap-1 text-[#ffb400]"
+                    role="img"
+                    aria-label="Rated 3 out of 5"
+                  >
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                  </div>
+                </figcaption>
+              </figure>
+            </li>
+
+            <li class="w-full shrink-0 snap-center md:w-[46%] xl:w-[38%]">
+              <figure
+                class="relative h-full rounded-[25px] bg-white px-5 pb-[30px] pt-20 sm:pb-10 md:px-[25px] md:pt-[90px] xl:pl-10 xl:pr-[35px] xl:pt-[95px]"
+              >
+                <span
+                  class="tab-notch tab-notch--top left-[50px] rounded-b-[50%] px-2 pb-2"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&h=200&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="size-[60px] rounded-full object-cover md:size-[70px]"
+                  />
+                </span>
+                <blockquote
+                  class="font-heading text-base leading-[26px] sm:leading-[30px] md:text-lg md:leading-8"
+                >
+                  “I would recommend practitioners at this center to everyone!
+                  They are great to work with and are excellent trainers. Thank
+                  you all!”
+                </blockquote>
+                <figcaption
+                  class="mt-[15px] xl:mt-[30px] xl:flex xl:items-center xl:justify-between"
+                >
+                  <div class="mb-2.5 xl:mb-0">
+                    <p
+                      class="font-heading text-lg font-medium leading-[22px] text-ink sm:text-[22px] sm:leading-8 md:text-2xl md:leading-9"
+                    >
+                      David Lee
+                    </p>
+                    <p class="leading-[18px] text-brand sm:leading-[26px]">
+                      Satisfied Client
+                    </p>
+                  </div>
+                  <div
+                    class="flex gap-1 text-[#ffb400]"
+                    role="img"
+                    aria-label="Rated 3 out of 5"
+                  >
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                  </div>
+                </figcaption>
+              </figure>
+            </li>
+
+            <li class="w-full shrink-0 snap-center md:w-[46%] xl:w-[38%]">
+              <figure
+                class="relative h-full rounded-[25px] bg-white px-5 pb-[30px] pt-20 sm:pb-10 md:px-[25px] md:pt-[90px] xl:pl-10 xl:pr-[35px] xl:pt-[95px]"
+              >
+                <span
+                  class="tab-notch tab-notch--top left-[50px] rounded-b-[50%] px-2 pb-2"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&h=200&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="size-[60px] rounded-full object-cover md:size-[70px]"
+                  />
+                </span>
+                <blockquote
+                  class="font-heading text-base leading-[26px] sm:leading-[30px] md:text-lg md:leading-8"
+                >
+                  “I would recommend practitioners at this center to everyone!
+                  They are great to work with and are excellent trainers. Thank
+                  you all!”
+                </blockquote>
+                <figcaption
+                  class="mt-[15px] xl:mt-[30px] xl:flex xl:items-center xl:justify-between"
+                >
+                  <div class="mb-2.5 xl:mb-0">
+                    <p
+                      class="font-heading text-lg font-medium leading-[22px] text-ink sm:text-[22px] sm:leading-8 md:text-2xl md:leading-9"
+                    >
+                      Richard Scott
+                    </p>
+                    <p class="leading-[18px] text-brand sm:leading-[26px]">
+                      Client, China
+                    </p>
+                  </div>
+                  <div
+                    class="flex gap-1 text-[#ffb400]"
+                    role="img"
+                    aria-label="Rated 3 out of 5"
+                  >
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                  </div>
+                </figcaption>
+              </figure>
+            </li>
+
+            <li class="w-full shrink-0 snap-center md:w-[46%] xl:w-[38%]">
+              <figure
+                class="relative h-full rounded-[25px] bg-white px-5 pb-[30px] pt-20 sm:pb-10 md:px-[25px] md:pt-[90px] xl:pl-10 xl:pr-[35px] xl:pt-[95px]"
+              >
+                <span
+                  class="tab-notch tab-notch--top left-[50px] rounded-b-[50%] px-2 pb-2"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=200&h=200&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="size-[60px] rounded-full object-cover md:size-[70px]"
+                  />
+                </span>
+                <blockquote
+                  class="font-heading text-base leading-[26px] sm:leading-[30px] md:text-lg md:leading-8"
+                >
+                  “I would recommend practitioners at this center to everyone!
+                  They are great to work with and are excellent trainers. Thank
+                  you all!”
+                </blockquote>
+                <figcaption
+                  class="mt-[15px] xl:mt-[30px] xl:flex xl:items-center xl:justify-between"
+                >
+                  <div class="mb-2.5 xl:mb-0">
+                    <p
+                      class="font-heading text-lg font-medium leading-[22px] text-ink sm:text-[22px] sm:leading-8 md:text-2xl md:leading-9"
+                    >
+                      Daniel Craig
+                    </p>
+                    <p class="leading-[18px] text-brand sm:leading-[26px]">
+                      Satisfied Client
+                    </p>
+                  </div>
+                  <div
+                    class="flex gap-1 text-[#ffb400]"
+                    role="img"
+                    aria-label="Rated 3 out of 5"
+                  >
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                  </div>
+                </figcaption>
+              </figure>
+            </li>
+
+            <li class="w-full shrink-0 snap-center md:w-[46%] xl:w-[38%]">
+              <figure
+                class="relative h-full rounded-[25px] bg-white px-5 pb-[30px] pt-20 sm:pb-10 md:px-[25px] md:pt-[90px] xl:pl-10 xl:pr-[35px] xl:pt-[95px]"
+              >
+                <span
+                  class="tab-notch tab-notch--top left-[50px] rounded-b-[50%] px-2 pb-2"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&h=200&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="size-[60px] rounded-full object-cover md:size-[70px]"
+                  />
+                </span>
+                <blockquote
+                  class="font-heading text-base leading-[26px] sm:leading-[30px] md:text-lg md:leading-8"
+                >
+                  “I would recommend practitioners at this center to everyone!
+                  They are great to work with and are excellent trainers. Thank
+                  you all!”
+                </blockquote>
+                <figcaption
+                  class="mt-[15px] xl:mt-[30px] xl:flex xl:items-center xl:justify-between"
+                >
+                  <div class="mb-2.5 xl:mb-0">
+                    <p
+                      class="font-heading text-lg font-medium leading-[22px] text-ink sm:text-[22px] sm:leading-8 md:text-2xl md:leading-9"
+                    >
+                      Jane Brown
+                    </p>
+                    <p class="leading-[18px] text-brand sm:leading-[26px]">
+                      Client, USA
+                    </p>
+                  </div>
+                  <div
+                    class="flex gap-1 text-[#ffb400]"
+                    role="img"
+                    aria-label="Rated 3 out of 5"
+                  >
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                  </div>
+                </figcaption>
+              </figure>
+            </li>
+
+            <li class="w-full shrink-0 snap-center md:w-[46%] xl:w-[38%]">
+              <figure
+                class="relative h-full rounded-[25px] bg-white px-5 pb-[30px] pt-20 sm:pb-10 md:px-[25px] md:pt-[90px] xl:pl-10 xl:pr-[35px] xl:pt-[95px]"
+              >
+                <span
+                  class="tab-notch tab-notch--top left-[50px] rounded-b-[50%] px-2 pb-2"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=200&h=200&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="size-[60px] rounded-full object-cover md:size-[70px]"
+                  />
+                </span>
+                <blockquote
+                  class="font-heading text-base leading-[26px] sm:leading-[30px] md:text-lg md:leading-8"
+                >
+                  “I would recommend practitioners at this center to everyone!
+                  They are great to work with and are excellent trainers. Thank
+                  you all!”
+                </blockquote>
+                <figcaption
+                  class="mt-[15px] xl:mt-[30px] xl:flex xl:items-center xl:justify-between"
+                >
+                  <div class="mb-2.5 xl:mb-0">
+                    <p
+                      class="font-heading text-lg font-medium leading-[22px] text-ink sm:text-[22px] sm:leading-8 md:text-2xl md:leading-9"
+                    >
+                      Paul Hill
+                    </p>
+                    <p class="leading-[18px] text-brand sm:leading-[26px]">
+                      Client, China
+                    </p>
+                  </div>
+                  <div
+                    class="flex gap-1 text-[#ffb400]"
+                    role="img"
+                    aria-label="Rated 3 out of 5"
+                  >
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                    <svg class="icon size-5 fill-current stroke-0 text-ink/15">
+                      <use href="#i-star" />
+                    </svg>
+                  </div>
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+
+          <div class="flex justify-center">
+            <a
+              href="/contact"
+              class="btn group bg-ink text-white hover:bg-brand"
+            >
+              Get Your Quote
+              <span class="btn-icon bg-white text-ink">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <ul
+            class="mt-[30px] sm:flex sm:justify-center sm:gap-5 md:gap-[70px]"
+          >
+            <li
+              class="mb-[18px] flex items-center font-heading font-medium leading-5 text-ink"
+            >
+              <svg class="icon mr-[13px] size-5 text-brand" aria-hidden="true">
+                <use href="#i-check-circle" />
+              </svg>
+              Trusted by 5,000+ company
+            </li>
+            <li
+              class="mb-[18px] flex items-center font-heading font-medium leading-5 text-ink"
+            >
+              <svg class="icon mr-[13px] size-5 text-brand" aria-hidden="true">
+                <use href="#i-check-circle" />
+              </svg>
+              30-Days Money Back Guarantee
+            </li>
+          </ul>
+
+          <!-- Client logos (placeholder wordmarks) -->
+          <div
+            class="mt-[50px] flex overflow-hidden border-t border-ink/10 py-[30px] md:py-[50px] lg:mt-[70px] lg:py-[70px]"
+          >
+            <ul class="marquee-track" aria-label="Our clients">
+              <li class="client-logo">
+                <svg class="icon size-7" aria-hidden="true">
+                  <use href="#i-layers" /></svg
+                >Steelworks
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7" aria-hidden="true">
+                  <use href="#i-zap" /></svg
+                >Voltcore
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7" aria-hidden="true">
+                  <use href="#i-shield" /></svg
+                >Ironclad
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7" aria-hidden="true">
+                  <use href="#i-box" /></svg
+                >Forgeline
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7" aria-hidden="true">
+                  <use href="#i-target" /></svg
+                >Axis &amp; Co
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7" aria-hidden="true">
+                  <use href="#i-tool" /></svg
+                >Metalix
+              </li>
+            </ul>
+            <ul class="marquee-track" aria-hidden="true">
+              <li class="client-logo">
+                <svg class="icon size-7"><use href="#i-layers" /></svg
+                >Steelworks
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7"><use href="#i-zap" /></svg>Voltcore
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7"><use href="#i-shield" /></svg>Ironclad
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7"><use href="#i-box" /></svg>Forgeline
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7"><use href="#i-target" /></svg>Axis
+                &amp; Co
+              </li>
+              <li class="client-logo">
+                <svg class="icon size-7"><use href="#i-tool" /></svg>Metalix
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== Projects ==============================
+           From md up the cards are sticky, so each one slides over the previous as you scroll. -->
+      <section
+        id="projects"
+        class="rounded-[30px] bg-white px-5 py-[60px] md:px-[50px] md:py-20 lg:px-[70px] lg:py-[100px] xl:mx-10 xl:px-[95px]"
+      >
+        <header class="mb-5 text-center md:mb-10 lg:mb-[60px]">
+          <p class="eyebrow">Selected Projects</p>
+          <h2 class="section-title">
+            Infrastructure Delivered With<br /><span class="text-brand"
+              >Technical Precision</span
+            >
+          </h2>
+        </header>
+
+        <ul class="space-y-[30px]">
+          <li class="md:sticky md:top-[150px]">
+            <a
+              href="/project/metal-production"
+              class="group relative flex justify-end overflow-hidden rounded-[20px] px-[15px] pb-5 pt-[100px] sm:px-5 md:pb-20 lg:px-10 lg:pb-[120px] lg:pt-[140px]"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1400&q=80"
+                alt=""
+                loading="lazy"
+                class="cover"
+              />
+              <div
+                class="relative w-full rounded-[25px] bg-white px-[25px] pb-[90px] pt-[35px] sm:max-w-[350px] md:max-w-[400px] md:px-[34px] md:pt-[38px] lg:max-w-[425px]"
+              >
+                <p class="kicker mb-1.5 text-brand">
+                  Electrical / Infrastructure
+                </p>
+                <h3
+                  class="mb-[18px] border-b border-ink/10 pb-[18px] text-xl font-semibold leading-[22px] sm:mb-6 sm:pb-6 sm:text-2xl sm:leading-[30px] lg:mb-7 lg:pb-7"
+                >
+                  Kenya Power Last Mile
+                </h3>
+                <p>
+                  Electricity connectivity works for Phase IV (AFD/EU), Lot 1.
+                </p>
+                <span
+                  class="round-btn absolute bottom-5 right-[34px] bg-brand text-white transition-colors group-hover:bg-ink"
+                >
+                  <span class="arrow-swap">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                    <svg class="icon" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                  </span>
+                </span>
+              </div>
+            </a>
+          </li>
+          <li class="md:sticky md:top-[150px]">
+            <a
+              href="/project/manufacturing"
+              class="group relative flex justify-end overflow-hidden rounded-[20px] px-[15px] pb-5 pt-[100px] sm:px-5 md:pb-20 lg:px-10 lg:pb-[120px] lg:pt-[140px]"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1563968743333-044cef800494?auto=format&fit=crop&w=1400&q=80"
+                alt=""
+                loading="lazy"
+                class="cover"
+              />
+              <div
+                class="relative w-full rounded-[25px] bg-white px-[25px] pb-[90px] pt-[35px] sm:max-w-[350px] md:max-w-[400px] md:px-[34px] md:pt-[38px] lg:max-w-[425px]"
+              >
+                <p class="kicker mb-1.5 text-brand">Construction</p>
+                <h3
+                  class="mb-[18px] border-b border-ink/10 pb-[18px] text-xl font-semibold leading-[22px] sm:mb-6 sm:pb-6 sm:text-2xl sm:leading-[30px] lg:mb-7 lg:pb-7"
+                >
+                  Residential Developments
+                </h3>
+                <p>
+                  Apartments in Umoja Estate, Nairobi, and a mansion in Runda
+                  Estate, Kiambu.
+                </p>
+                <span
+                  class="round-btn absolute bottom-5 right-[34px] bg-brand text-white transition-colors group-hover:bg-ink"
+                >
+                  <span class="arrow-swap">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                    <svg class="icon" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                  </span>
+                </span>
+              </div>
+            </a>
+          </li>
+          <li class="md:sticky md:top-[150px]">
+            <a
+              href="/project/energy-power-project"
+              class="group relative flex justify-end overflow-hidden rounded-[20px] px-[15px] pb-5 pt-[100px] sm:px-5 md:pb-20 lg:px-10 lg:pb-[120px] lg:pt-[140px]"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=80"
+                alt=""
+                loading="lazy"
+                class="cover"
+              />
+              <div
+                class="relative w-full rounded-[25px] bg-white px-[25px] pb-[90px] pt-[35px] sm:max-w-[350px] md:max-w-[400px] md:px-[34px] md:pt-[38px] lg:max-w-[425px]"
+              >
+                <p class="kicker mb-1.5 text-brand">Security / ICT</p>
+                <h3
+                  class="mb-[18px] border-b border-ink/10 pb-[18px] text-xl font-semibold leading-[22px] sm:mb-6 sm:pb-6 sm:text-2xl sm:leading-[30px] lg:mb-7 lg:pb-7"
+                >
+                  Cake Hut Systems
+                </h3>
+                <p>
+                  IP CCTV, structured cabling and point-of-sale installation in
+                  Westlands, Nairobi.
+                </p>
+                <span
+                  class="round-btn absolute bottom-5 right-[34px] bg-brand text-white transition-colors group-hover:bg-ink"
+                >
+                  <span class="arrow-swap">
+                    <svg class="icon" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                    <svg class="icon" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                  </span>
+                </span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ============================== Blog ============================== -->
+      <section id="blog" class="hidden py-[60px] md:py-20 lg:py-[100px]">
+        <div class="shell">
+          <div
+            class="mb-[30px] md:mb-[50px] md:flex md:items-end md:justify-between"
+          >
+            <header class="mb-5 md:mb-0">
+              <p class="eyebrow">Latest Blog</p>
+              <h2 class="section-title">
+                Articles &amp; blog posts with<br /><span class="text-brand"
+                  >useful information</span
+                >
+              </h2>
+            </header>
+            <a
+              href="/blog-02"
+              class="btn group border border-ink text-ink hover:bg-ink hover:text-white"
+            >
+              Read More
+              <span class="btn-icon bg-brand text-white">
+                <span class="arrow-swap">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-arrow" />
+                  </svg>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <ul class="grid gap-5 xl:grid-cols-2 xl:gap-10">
+            <li>
+              <a
+                href="/post/metals-which-shape-our-world-a-greater-look"
+                class="group relative block h-full rounded-[25px] bg-white px-[15px] pb-[30px] pt-[15px] sm:p-5 md:flex md:items-center"
+              >
+                <div
+                  class="relative h-[280px] overflow-hidden rounded-[20px] sm:h-[350px] md:mr-[30px] md:h-[210px] md:w-[240px] md:shrink-0"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div class="px-2.5 pb-10 pt-[30px] md:p-0 md:pb-12">
+                  <ul class="mb-2 sm:mb-[15px] sm:flex">
+                    <li
+                      class="kicker mr-4 flex items-center pb-2 text-ink/80 sm:pb-0"
+                    >
+                      <svg
+                        class="icon mr-2 size-4 text-brand"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-calendar" /></svg
+                      ><time datetime="2024-12-19">Dec 19, 2024</time>
+                    </li>
+                    <li
+                      class="kicker mr-4 flex items-center pb-2 text-ink/80 sm:pb-0"
+                    >
+                      <svg
+                        class="icon mr-2 size-4 text-brand"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-user" /></svg
+                      >by admin
+                    </li>
+                  </ul>
+                  <h3
+                    class="text-lg font-semibold leading-[26px] transition-colors group-hover:text-brand sm:text-2xl sm:leading-8"
+                  >
+                    Metals which shape our world: a greater look
+                  </h3>
+                </div>
+                <span class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2">
+                  <span class="round-btn bg-white text-ink">
+                    <span class="arrow-swap">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/post/gaining-proficiency-in-metallurgy-quality-control"
+                class="group relative block h-full rounded-[25px] bg-white px-[15px] pb-[30px] pt-[15px] sm:p-5 md:flex md:items-center"
+              >
+                <div
+                  class="relative h-[280px] overflow-hidden rounded-[20px] sm:h-[350px] md:mr-[30px] md:h-[210px] md:w-[240px] md:shrink-0"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div class="px-2.5 pb-10 pt-[30px] md:p-0 md:pb-12">
+                  <ul class="mb-2 sm:mb-[15px] sm:flex">
+                    <li
+                      class="kicker mr-4 flex items-center pb-2 text-ink/80 sm:pb-0"
+                    >
+                      <svg
+                        class="icon mr-2 size-4 text-brand"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-calendar" /></svg
+                      ><time datetime="2024-12-19">Dec 19, 2024</time>
+                    </li>
+                    <li
+                      class="kicker mr-4 flex items-center pb-2 text-ink/80 sm:pb-0"
+                    >
+                      <svg
+                        class="icon mr-2 size-4 text-brand"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-user" /></svg
+                      >by admin
+                    </li>
+                  </ul>
+                  <h3
+                    class="text-lg font-semibold leading-[26px] transition-colors group-hover:text-brand sm:text-2xl sm:leading-8"
+                  >
+                    Gaining proficiency in metallurgy quality control
+                  </h3>
+                </div>
+                <span class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2">
+                  <span class="round-btn bg-white text-ink">
+                    <span class="arrow-swap">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/post/interactive-technologies-in-manufacturing-facilities"
+                class="group relative block h-full rounded-[25px] bg-white px-[15px] pb-[30px] pt-[15px] sm:p-5 md:flex md:items-center"
+              >
+                <div
+                  class="relative h-[280px] overflow-hidden rounded-[20px] sm:h-[350px] md:mr-[30px] md:h-[210px] md:w-[240px] md:shrink-0"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div class="px-2.5 pb-10 pt-[30px] md:p-0 md:pb-12">
+                  <ul class="mb-2 sm:mb-[15px] sm:flex">
+                    <li
+                      class="kicker mr-4 flex items-center pb-2 text-ink/80 sm:pb-0"
+                    >
+                      <svg
+                        class="icon mr-2 size-4 text-brand"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-calendar" /></svg
+                      ><time datetime="2024-12-19">Dec 19, 2024</time>
+                    </li>
+                    <li
+                      class="kicker mr-4 flex items-center pb-2 text-ink/80 sm:pb-0"
+                    >
+                      <svg
+                        class="icon mr-2 size-4 text-brand"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-user" /></svg
+                      >by admin
+                    </li>
+                  </ul>
+                  <h3
+                    class="text-lg font-semibold leading-[26px] transition-colors group-hover:text-brand sm:text-2xl sm:leading-8"
+                  >
+                    Interactive technologies in manufacturing facilities
+                  </h3>
+                </div>
+                <span class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2">
+                  <span class="round-btn bg-white text-ink">
+                    <span class="arrow-swap">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/post/future-developments-and-trends-in-metallurgy"
+                class="group relative block h-full rounded-[25px] bg-white px-[15px] pb-[30px] pt-[15px] sm:p-5 md:flex md:items-center"
+              >
+                <div
+                  class="relative h-[280px] overflow-hidden rounded-[20px] sm:h-[350px] md:mr-[30px] md:h-[210px] md:w-[240px] md:shrink-0"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1080&q=80"
+                    alt=""
+                    loading="lazy"
+                    class="cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div class="px-2.5 pb-10 pt-[30px] md:p-0 md:pb-12">
+                  <ul class="mb-2 sm:mb-[15px] sm:flex">
+                    <li
+                      class="kicker mr-4 flex items-center pb-2 text-ink/80 sm:pb-0"
+                    >
+                      <svg
+                        class="icon mr-2 size-4 text-brand"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-calendar" /></svg
+                      ><time datetime="2024-12-19">Dec 19, 2024</time>
+                    </li>
+                    <li
+                      class="kicker mr-4 flex items-center pb-2 text-ink/80 sm:pb-0"
+                    >
+                      <svg
+                        class="icon mr-2 size-4 text-brand"
+                        aria-hidden="true"
+                      >
+                        <use href="#i-user" /></svg
+                      >by admin
+                    </li>
+                  </ul>
+                  <h3
+                    class="text-lg font-semibold leading-[26px] transition-colors group-hover:text-brand sm:text-2xl sm:leading-8"
+                  >
+                    Future developments and trends in metallurgy
+                  </h3>
+                </div>
+                <span class="tab-notch right-[50px] rounded-t-[50%] px-2 pt-2">
+                  <span class="round-btn bg-white text-ink">
+                    <span class="arrow-swap">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================== Footer ============================== -->
+    <footer class="lg:px-5 lg:pb-5">
+      <div class="rounded-t-[25px] bg-ink pt-[60px] lg:rounded-[25px] lg:pt-20">
+        <div class="shell">
+          <div
+            class="mb-[50px] grid gap-5 sm:mb-5 sm:grid-cols-2 sm:gap-[30px] lg:mb-[38px] lg:flex lg:gap-5"
+          >
+            <div class="lg:w-[32%] xl:w-[44%]">
+              <a
+                href="/"
+                aria-label="Induztry home"
+                class="mb-[30px] inline-flex items-center gap-3"
+              >
+                <svg class="size-11" aria-hidden="true">
+                  <use href="#i-logo" />
+                </svg>
+                <span
+                  class="font-heading text-[28px] font-bold tracking-tight text-white"
+                  >Induztry</span
+                >
+              </a>
+              <p class="mb-[30px] max-w-[280px] text-white/90">
+                Quam nulla porttitor massa id neque aliquam Id leo in vitae
+                turpis massa sed diam vel quam.
+              </p>
+              <ul class="flex gap-[15px] text-white">
+                <li>
+                  <a
+                    href="https://www.facebook.com/"
+                    aria-label="Facebook"
+                    class="block transition-colors hover:text-brand"
+                    ><svg class="icon size-4" aria-hidden="true">
+                      <use href="#i-facebook" /></svg
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com/"
+                    aria-label="Twitter"
+                    class="block transition-colors hover:text-brand"
+                    ><svg class="icon size-4" aria-hidden="true">
+                      <use href="#i-twitter" /></svg
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/"
+                    aria-label="Instagram"
+                    class="block transition-colors hover:text-brand"
+                    ><svg class="icon size-4" aria-hidden="true">
+                      <use href="#i-instagram" /></svg
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/"
+                    aria-label="YouTube"
+                    class="block transition-colors hover:text-brand"
+                    ><svg class="icon size-4" aria-hidden="true">
+                      <use href="#i-youtube" /></svg
+                  ></a>
+                </li>
+              </ul>
+            </div>
+
+            <nav aria-label="Company" class="lg:w-1/5">
+              <h2 class="footer-heading">Company</h2>
+              <ul class="grid grid-cols-2 gap-x-5 [&_a]:mb-[18px]">
+                <li><a href="/" class="footer-link">About us</a></li>
+                <li>
+                  <a href="/utility-pages/licenses" class="footer-link"
+                    >Licenses</a
+                  >
+                </li>
+                <li><a href="/about-us" class="footer-link">Appointment</a></li>
+                <li>
+                  <a href="/utility-pages/style-guide" class="footer-link"
+                    >Style Guide</a
+                  >
+                </li>
+                <li><a href="/services" class="footer-link">Experts</a></li>
+                <li>
+                  <a href="/utility-pages/changelog" class="footer-link"
+                    >Change Log</a
+                  >
+                </li>
+                <li>
+                  <a href="/pricing-plan" class="footer-link">Contact Us</a>
+                </li>
+              </ul>
+            </nav>
+
+            <div class="lg:w-1/5">
+              <h2 class="footer-heading">Working Hours</h2>
+              <dl class="grid grid-cols-[auto_1fr] gap-x-4">
+                <dt class="footer-link">Mon to Fri :</dt>
+                <dd class="footer-link">08am - 04pm</dd>
+                <dt class="footer-link">Saturday :</dt>
+                <dd class="footer-link">08am - 01pm</dd>
+                <dt class="footer-link">Sunday :</dt>
+                <dd class="footer-link">Closed</dd>
+              </dl>
+            </div>
+
+            <address class="not-italic lg:w-[18%]">
+              <h2 class="footer-heading">Contact Us</h2>
+              <p class="footer-link">
+                Valentin, Street Road 24,<br />New York, USA - 67452
+              </p>
+              <a href="mailto:contact@pbmit.com" class="footer-link underline"
+                >contact@pbmit.com</a
+              >
+              <a
+                href="tel:+(02)574-328-301"
+                class="footer-link text-base leading-6 lg:text-[17px] 2xl:text-[22px] 2xl:leading-[30px]"
+                >+(02) 574 - 328 - 301</a
+              >
+            </address>
+          </div>
+
+          <div
+            class="rounded-[25px] border border-white/10 px-5 py-[35px] md:px-[30px] md:py-10 lg:flex lg:items-center lg:px-10 lg:py-[30px] xl:px-[65px] xl:py-[35px]"
+          >
+            <p
+              class="pb-5 font-heading text-xl font-medium leading-7 text-white sm:text-[26px] sm:leading-8 lg:w-1/2 lg:border-r lg:border-white/10 lg:pb-0 lg:pr-5 lg:text-3xl lg:leading-9 xl:text-[38px] xl:leading-[48px]"
+            >
+              Subscribe to our newsletter, Stay always in touch!
+            </p>
+            <!-- TODO: point `action` at the newsletter endpoint; the Webflow form handler is gone. -->
+            <form
+              action="#"
+              method="post"
+              class="relative lg:w-1/2 lg:pl-[55px]"
+            >
+              <label for="footer-email" class="sr-only">Email address</label>
+              <input
+                type="email"
+                id="footer-email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="Your Email Address"
+                class="h-[60px] w-full rounded-full bg-white pl-5 pr-5 text-sm text-ink outline-none placeholder:text-body focus-visible:ring-2 focus-visible:ring-brand sm:pl-[30px] sm:pr-[42%]"
+              />
+              <button
+                type="submit"
+                class="mt-2.5 h-[60px] w-full rounded-full bg-brand px-10 font-sans text-[15px] font-semibold text-white transition-[filter] hover:brightness-110 sm:absolute sm:right-0 sm:top-0 sm:mt-0 sm:w-2/5 lg:w-[calc(40%-22px)]"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+
+          <div
+            class="py-6 text-center text-sm leading-none text-white/70 md:flex md:items-center md:justify-between md:text-left"
+          >
+            <p class="mb-2.5 md:mb-0">© 2024 PBM Infotech</p>
+            <ul class="sm:flex sm:justify-center">
+              <li
+                class="mb-2.5 sm:mb-0 sm:mr-2 sm:border-r-2 sm:border-white/80 sm:pr-2.5"
+              >
+                <a href="#" class="transition-colors hover:text-white"
+                  >Terms and conditions</a
+                >
+              </li>
+              <li>
+                <a href="#" class="transition-colors hover:text-white"
+                  >Privacy policy</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
