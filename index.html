@@ -37,6 +37,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700;800&display=swap"
     />
 
+    <script>
+      // Lets the CSS hide scroll-reveal targets only when the observer below can show them again.
+      if ("IntersectionObserver" in window)
+        document.documentElement.classList.add("js");
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -278,6 +283,67 @@
           );
         }
       }
+
+      /*
+       * Motion. Everything sits behind prefers-reduced-motion, and the scroll reveals
+       * only hide content once the head script has confirmed JS is running (.js).
+       */
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+      }
+      @keyframes drop {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+      }
+      @keyframes kenburns {
+        from {
+          transform: scale(1.12);
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .site-header {
+          animation: drop 0.6s ease-out backwards;
+        }
+
+        /* Hero: the active slide's photo eases out of a slow zoom while its copy rises in. */
+        section:has(#hero-1:checked) > .hero-slide:nth-of-type(1) > img,
+        section:has(#hero-2:checked) > .hero-slide:nth-of-type(2) > img,
+        section:has(#hero-3:checked) > .hero-slide:nth-of-type(3) > img {
+          animation: kenburns 8s ease-out backwards;
+        }
+        section:has(#hero-1:checked) > .hero-slide:nth-of-type(1) > .hero-copy > *,
+        section:has(#hero-2:checked) > .hero-slide:nth-of-type(2) > .hero-copy > *,
+        section:has(#hero-3:checked) > .hero-slide:nth-of-type(3) > .hero-copy > * {
+          animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s backwards;
+        }
+        .hero-copy > :nth-child(2) {
+          animation-delay: 0.35s !important;
+        }
+        .hero-copy > :nth-child(3) {
+          animation-delay: 0.5s !important;
+        }
+
+        /* Scroll reveals: blocks fade up as they enter the viewport; grid items stagger. */
+        .js [data-reveal],
+        .js [data-reveal-stagger] > * {
+          opacity: 0;
+          transform: translateY(32px);
+          transition:
+            opacity 0.7s ease-out var(--reveal-delay, 0ms),
+            transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+        }
+        .js [data-reveal].is-revealed,
+        .js [data-reveal-stagger] > .is-revealed {
+          opacity: 1;
+          transform: none;
+        }
+      }
     </style>
 
     <script type="application/ld+json">
@@ -429,7 +495,7 @@
     </svg>
 
     <!-- ============================== Header ============================== -->
-    <header class="group/header relative z-20 px-[22px] xl:px-[50px]">
+    <header class="site-header group/header relative z-20 px-[22px] xl:px-[50px]">
       <div class="relative flex h-[100px] items-center justify-between">
         <!-- CSS-only mobile menu: the checkbox is toggled by the hamburger <label> below. -->
         <input
@@ -459,14 +525,14 @@
         <a
           href="/"
           aria-label="Channah Ltd home"
-          class="flex items-center gap-3 lg:absolute lg:left-1/2 lg:-translate-x-1/2"
+          class="group/logo flex items-center gap-3 lg:absolute lg:left-1/2 lg:-translate-x-1/2"
         >
           <img
             src="extracted-logo/channah-mark.png"
             alt=""
             width="548"
             height="336"
-            class="h-11 w-auto"
+            class="h-11 w-auto transition-transform duration-500 ease-out group-hover/logo:-rotate-6 group-hover/logo:scale-110"
           />
           <span
             class="font-heading text-[28px] font-bold tracking-tight text-ink"
@@ -528,7 +594,7 @@
         class="group/hero relative h-[400px] overflow-hidden rounded-[20px] sm:h-[500px] sm:rounded-[25px] md:h-[600px] lg:mx-5 lg:h-[850px] xl:mx-[50px]"
       >
         <article
-          class="invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-1:checked]/hero:visible group-has-[#hero-1:checked]/hero:opacity-100"
+          class="hero-slide invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-1:checked]/hero:visible group-has-[#hero-1:checked]/hero:opacity-100"
         >
           <img
             src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
@@ -537,7 +603,7 @@
             class="cover"
           />
           <div class="absolute inset-0 bg-ink/60"></div>
-          <div class="relative">
+          <div class="hero-copy relative">
             <p
               class="inline-block rounded-full border border-white px-[15px] py-0.5 font-heading text-[10px] font-semibold uppercase leading-[18px] tracking-[0.5px] text-white sm:px-5 sm:text-xs sm:leading-5 sm:tracking-[1.2px]"
             >
@@ -566,7 +632,7 @@
         </article>
 
         <article
-          class="invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-2:checked]/hero:visible group-has-[#hero-2:checked]/hero:opacity-100"
+          class="hero-slide invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-2:checked]/hero:visible group-has-[#hero-2:checked]/hero:opacity-100"
         >
           <img
             src="https://images.unsplash.com/photo-1531256379416-9f000e90aacc?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
@@ -575,7 +641,7 @@
             class="cover"
           />
           <div class="absolute inset-0 bg-ink/60"></div>
-          <div class="relative">
+          <div class="hero-copy relative">
             <p
               class="inline-block rounded-full border border-white px-[15px] py-0.5 font-heading text-[10px] font-semibold uppercase leading-[18px] tracking-[0.5px] text-white sm:px-5 sm:text-xs sm:leading-5 sm:tracking-[1.2px]"
             >
@@ -604,7 +670,7 @@
         </article>
 
         <article
-          class="invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-3:checked]/hero:visible group-has-[#hero-3:checked]/hero:opacity-100"
+          class="hero-slide invisible absolute inset-0 flex items-center justify-center px-5 text-center opacity-0 transition-[opacity,visibility] duration-700 group-has-[#hero-3:checked]/hero:visible group-has-[#hero-3:checked]/hero:opacity-100"
         >
           <img
             src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
@@ -613,7 +679,7 @@
             class="cover"
           />
           <div class="absolute inset-0 bg-ink/60"></div>
-          <div class="relative">
+          <div class="hero-copy relative">
             <p
               class="inline-block rounded-full border border-white px-[15px] py-0.5 font-heading text-[10px] font-semibold uppercase leading-[18px] tracking-[0.5px] text-white sm:px-5 sm:text-xs sm:leading-5 sm:tracking-[1.2px]"
             >
@@ -676,7 +742,7 @@
       <!-- ============================== Feature cards ============================== -->
       <section aria-label="Why Channah" class="px-5 pt-10 xl:px-10">
         <div
-          class="grid gap-[15px] md:grid-cols-2 lg:gap-[35px] xl:grid-cols-4"
+          data-reveal-stagger class="grid gap-[15px] md:grid-cols-2 lg:gap-[35px] xl:grid-cols-4"
         >
           <a
             href="/about-us"
@@ -853,7 +919,7 @@
       </section>
 
       <!-- ============================== About (tabs) ============================== -->
-      <section
+      <section data-reveal
         id="about"
         class="px-5 pt-[60px] md:pt-20 lg:pt-[100px] xl:px-[55px]"
       >
@@ -1069,7 +1135,7 @@
       </section>
 
       <!-- ============================== Marquee ============================== -->
-      <div
+      <div data-reveal
         class="flex overflow-hidden py-[30px] md:pb-[60px] md:pt-10 lg:pb-20 lg:pt-[70px]"
       >
         <div class="marquee-track">
@@ -1118,7 +1184,7 @@
         class="group/services rounded-[30px] bg-ink py-[60px] [--notch:#fff] md:mx-5 md:py-20 lg:mx-[30px] lg:py-[100px]"
       >
         <div class="shell">
-          <div class="mb-10 lg:mb-[30px] lg:flex lg:items-center">
+          <div data-reveal class="mb-10 lg:mb-[30px] lg:flex lg:items-center">
             <header class="mb-5 lg:mb-0 lg:w-1/2">
               <p class="eyebrow border-white/20">Our Services</p>
               <h2 class="section-title text-white">
@@ -1168,7 +1234,7 @@
             </div>
           </div>
 
-          <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-[30px]">
+          <ul data-reveal-stagger class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-[30px]">
             <li class="lg:group-has-[#services-page-2:checked]/services:hidden">
               <a
                 href="/services/personalized-fabrication"
@@ -1523,7 +1589,7 @@
       <!-- ============================== Process steps ============================== -->
       <section class="pt-[60px] md:pt-20 lg:pt-[100px]">
         <div class="shell">
-          <header class="mb-5 text-center md:mb-[50px]">
+          <header data-reveal class="mb-5 text-center md:mb-[50px]">
             <p class="eyebrow">How We Deliver</p>
             <h2 class="section-title">
               Disciplined Delivery From<br /><span class="text-brand"
@@ -1533,7 +1599,7 @@
           </header>
 
           <ol
-            class="grid gap-[30px] md:grid-cols-2 lg:grid-cols-4 xl:gap-[50px]"
+            data-reveal-stagger class="grid gap-[30px] md:grid-cols-2 lg:grid-cols-4 xl:gap-[50px]"
           >
             <li class="lg:border-r lg:border-ink/10 lg:pr-[30px] xl:pr-[50px]">
               <div class="relative mb-[15px] rounded-[20px] md:mb-8">
@@ -1643,7 +1709,7 @@
       </section>
 
       <!-- ============================== Team ============================== -->
-      <section
+      <section data-reveal
         id="team"
         class="hidden pb-20 pt-[70px] lg:pb-[120px] lg:pt-[90px]"
       >
@@ -1861,7 +1927,7 @@
       </section>
 
       <!-- ============================== Video + FAQ ============================== -->
-      <section id="faq" class="px-2.5 lg:flex xl:px-[30px]">
+      <section data-reveal id="faq" class="px-2.5 lg:flex xl:px-[30px]">
         <div class="mb-5 lg:mb-0 lg:w-[35%] lg:pr-5 2xl:w-2/5">
           <div
             class="relative h-[300px] overflow-hidden rounded-[25px] md:h-[400px] lg:h-full"
@@ -1965,7 +2031,7 @@
 
       <!-- ============================== Testimonials ==============================
            Scroll-snap carousel: swipe / trackpad / keyboard arrows, no JS. -->
-      <section
+      <section data-reveal
         id="testimonials"
         class="hidden overflow-hidden pt-[60px] md:pt-20 lg:pt-[100px]"
       >
@@ -2439,7 +2505,7 @@
 
       <!-- ============================== Projects ==============================
            From md up the cards are sticky, so each one slides over the previous as you scroll. -->
-      <section
+      <section data-reveal
         id="projects"
         class="rounded-[30px] bg-white px-5 py-[60px] md:px-[50px] md:py-20 lg:px-[70px] lg:py-[100px] xl:mx-10 xl:px-[95px]"
       >
@@ -2578,7 +2644,7 @@
       <section id="blog" class="hidden py-[60px] md:py-20 lg:py-[100px]">
         <div class="shell">
           <div
-            class="mb-[30px] md:mb-[50px] md:flex md:items-end md:justify-between"
+            data-reveal class="mb-[30px] md:mb-[50px] md:flex md:items-end md:justify-between"
           >
             <header class="mb-5 md:mb-0">
               <p class="eyebrow">Latest Blog</p>
@@ -2606,7 +2672,7 @@
             </a>
           </div>
 
-          <ul class="grid gap-5 xl:grid-cols-2 xl:gap-10">
+          <ul data-reveal-stagger class="grid gap-5 xl:grid-cols-2 xl:gap-10">
             <li>
               <a
                 href="/post/metals-which-shape-our-world-a-greater-look"
@@ -3020,5 +3086,31 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      // Scroll reveals: see the "Motion" block in the stylesheet.
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add("is-revealed");
+              observer.unobserve(entry.target);
+            }
+          },
+          { rootMargin: "0px 0px -10% 0px" },
+        );
+
+        document.querySelectorAll("[data-reveal]").forEach((el) => {
+          observer.observe(el);
+        });
+        document.querySelectorAll("[data-reveal-stagger]").forEach((group) => {
+          [...group.children].forEach((el, i) => {
+            el.style.setProperty("--reveal-delay", `${(i % 4) * 90}ms`);
+            observer.observe(el);
+          });
+        });
+      }
+    </script>
   </body>
 </html>
